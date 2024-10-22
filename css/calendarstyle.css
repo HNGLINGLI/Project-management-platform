@@ -1,13 +1,13 @@
 :root {
-    --primary-color: #3498db;
-    --secondary-color: #2ecc71;
+    --primary-color: #615751;
+    --secondary-color: #938275;
     --background-color: #ecf0f1;
     --text-color: #34495e;
     --border-color: #bdc3c7;
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Arial', sans-serif;
     line-height: 1.6;
     color: var(--text-color);
     background-color: var(--background-color);
@@ -38,17 +38,17 @@ body {
 }
 
 #calendar-controls button {
-    background: transparent;  
+    background: #f2eeea;  
     border: none;             
     cursor: pointer;          
     padding: 10px;           
-    color: #fc0505;           
+    color: var(--secondary-color);          
     font-size: 30px;         
     transition: color 0.3s;  
 }
 
 #calendar-controls button:hover {
-    color: #007BFF;          
+    color: var(--primary-color);          
 }
 
 .form-container {
@@ -85,7 +85,7 @@ input, select {
 }
 
 button {
-    background-color: var(--secondary-color);
+    background-color: var(--primary-color);
     color: white;
     border: none;
     padding: 10px 15px;
@@ -95,7 +95,7 @@ button {
 }
 
 button:hover {
-    background-color: #27ae60;
+    background-color: var(--secondary-color);
 }
 
 #calendar {
@@ -106,7 +106,7 @@ button:hover {
 }
 
 .calendar-day {
-    background-color: #f8f9fa;
+    background-color: #f2eeea;
     border-radius: 4px;
     padding: 10px;
     text-align: center;

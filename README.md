@@ -32,3 +32,15 @@ CREATE TABLE Engineers (
     start_date DATE,
     salary DECIMAL(10, 2)
 );
+```
+
+## Installation
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/hnglingli/Project-management-platform.git
+   ```
+
+## Demo
+
+You can view the demo on website here: [hnglingli.com](https://hnglingli.com)

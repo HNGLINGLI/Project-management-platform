@@ -118,11 +118,8 @@
                     <div class="form-group col-md-2">
                         <input type="text" id="name" name="name" class="form-control" placeholder="Name" required>
                     </div>
-                    <div class="form-group col-md-2">
+                    <div class="form-group col-md-3">
                         <input type="text" id="position" name="position" class="form-control" placeholder="Position" required>
-                    </div>
-                    <div class="form-group col-md-1">
-                        <input type="text" id="office" name="office" class="form-control" placeholder="Office" required>
                     </div>
                     <div class="form-group col-md-1">
                         <input type="number" id="age" name="age" class="form-control" placeholder="Age" required>
@@ -149,56 +146,55 @@
                 </div>
                 <div class="table-responsive p-3">
                   <table class="table align-items-center table-flush table-hover" id="dataTableHover">
-                    <thead class="thead-light">
-                      <tr>
-                        <th>Name</th>
-                        <th>Position</th>
-                        <th>Office</th>
-                        <th>Age</th>
-                        <th>Start date</th>
-                        <th>Salary</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        // Include database connection
-                        include 'test/manage_engineers.php';
-      
-                        // Query to select data
-                        $sql = "SELECT name, position, office, age, start_date, salary FROM Engineers";
-                        $result = $conn->query($sql);
-      
-                        // Check if there are results
-                        if ($result->num_rows > 0) {
-                            // Output data of each row
-                            while($row = $result->fetch_assoc()) {
-                                echo "<tr>";
-                                echo "<td>" . htmlspecialchars($row['name']) . "</td>";
-                                echo "<td>" . htmlspecialchars($row['position']) . "</td>";
-                                echo "<td>" . htmlspecialchars($row['office']) . "</td>";
-                                echo "<td>" . htmlspecialchars($row['age']) . "</td>";
-                                echo "<td>" . htmlspecialchars($row['start_date']) . "</td>";
-                                echo "<td>" . htmlspecialchars(number_format($row['salary'], 2)) . "</td>";
-                                echo "</tr>";
-                            }
-                        } else {
-                            echo "<tr><td colspan='6'>No records found</td></tr>";
-                        }
-      
-                        // Close connection
-                        $conn->close();
-                        ?>
-                      </tbody>
-                    <tfoot>
-                      <tr>
-                        <th>Name</th>
-                        <th>Position</th>
-                        <th>Office</th>
-                        <th>Age</th>
-                        <th>Start date</th>
-                        <th>Salary</th>
-                      </tr>
-                    </tfoot>
+                  <thead class="thead-light">
+  <tr>
+    <th>Name</th>
+    <th>Position</th>
+    <th>Age</th>
+    <th>Start date</th>
+    <th>Salary</th>
+    <th></th>
+  </tr>
+</thead>
+<tbody>
+  <?php
+  include 'test/manage_engineers.php';
+  
+  $sql = "SELECT engineer_id, name, position, age, start_date, salary FROM Engineers";
+  $result = $conn->query($sql);
+
+  if ($result->num_rows > 0) {
+      while($row = $result->fetch_assoc()) {
+          echo "<tr>";
+          echo "<td>" . htmlspecialchars($row['name']) . "</td>";
+          echo "<td>" . htmlspecialchars($row['position']) . "</td>";
+          echo "<td>" . htmlspecialchars($row['age']) . "</td>";
+          echo "<td>" . htmlspecialchars($row['start_date']) . "</td>";
+          echo "<td>" . htmlspecialchars(number_format($row['salary'], 2)) . "</td>";
+          echo "<td>
+                  <a href='test/edit_engineers.php?id=" . $row['engineer_id'] . "' class='btn btn-sm btn-warning'>Edit</a>
+                  <a href='test/delete_engineers.php?id=" . $row['engineer_id'] . "' class='btn btn-sm btn-danger' onclick=\"return confirm('Are you sure you want to delete this record?');\">Delete</a>
+                </td>";
+          echo "</tr>";
+      }
+  } else {
+      echo "<tr><td colspan='6'>No records found</td></tr>";
+  }
+
+  $conn->close();
+  ?>
+</tbody>
+<tfoot>
+  <tr>
+    <th>Name</th>
+    <th>Position</th>
+    <th>Age</th>
+    <th>Start date</th>
+    <th>Salary</th>
+    <th></th>
+  </tr>
+</tfoot>
+
                   </table>
                 </div>
               </div>
@@ -227,12 +223,29 @@
   <script src="vendor/datatables/jquery.dataTables.min.js"></script>
   <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
 
-  <!-- Page level custom scripts -->
-  <script>
-    $(document).ready(function () {
-      $('#dataTableHover').DataTable(); 
+<script>
+$(document).ready(function () {
+    // Destroy the existing DataTable instance if it exists
+    if ($.fn.DataTable.isDataTable('#dataTableHover')) {
+        $('#dataTableHover').DataTable().destroy();
+    }
+    
+    // Initialize DataTable
+    $('#dataTableHover').DataTable({
+        "paging": true, 
+        "searching": true,
+        "ordering": true,
+        "lengthChange": true, 
+        "info": true,
+        "autoWidth": false,
+        "pageLength": 10,
+        "lengthMenu": [10, 25, 50, 100], 
+        "columnDefs": [
+            { "orderable": false, "targets": -1 }
+        ]
     });
-  </script>
+});
+</script>
 
   <!-- JavaScript for formatting the salary input -->
 <script>

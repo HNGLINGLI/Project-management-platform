@@ -1,6 +1,4 @@
 <?php
-echo "entered !";
-
 $servername = "localhost"; 
 $username = "hnglingli";        
 $password = "Cindy0205";            
@@ -21,13 +19,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve and sanitize POST data
     $name = htmlspecialchars($_POST['name']);
     $position = htmlspecialchars($_POST['position']);
-    $office = htmlspecialchars($_POST['office']);
     $age = (int)$_POST['age'];
     $startDate = $_POST['startDate'];
     $salary = str_replace(",", "", $_POST['salary']); 
 
     // Prepare SQL statement to insert data
-    $sql = "INSERT INTO engineers (name, position, office, age, start_date, salary) VALUES (?, ?, ?, ?, ?, ?)";
+    // Corrected SQL to match the number of columns and placeholders
+    $sql = "INSERT INTO engineers (name, position, age, start_date, salary) VALUES (?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
     
     if ($stmt === false) {
@@ -35,7 +33,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Bind parameters to the SQL query
-    $stmt->bind_param("sssids", $name, $position, $office, $age, $startDate, $salary);
+    // Correct binding: name, position, age, startDate, salary
+    $stmt->bind_param("ssids", $name, $position, $age, $startDate, $salary);
 
     // Execute and check if insertion was successful
     if ($stmt->execute()) {
@@ -44,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Error: " . htmlspecialchars($stmt->error);
     }
 
-    // Close the statement and connection
+    // Close the statement
     $stmt->close();
 }
 

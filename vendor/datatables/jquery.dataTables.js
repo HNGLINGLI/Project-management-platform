@@ -4001,7 +4001,7 @@
 			i, data = [], dataProp, column, columnSearch,
 			sort = _fnSortFlatten( settings ),
 			displayStart = settings._iDisplayStart,
-			displayLength = features.bPaginate !== false ?
+			displayLength = features.bPaginate !== true ?
 				settings._iDisplayLength :
 				-1;
 	

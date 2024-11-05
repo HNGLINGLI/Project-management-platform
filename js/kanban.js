@@ -45,7 +45,7 @@ function createTask(taskId, title, description) {
 
   taskTitle.textContent = title
   taskDescription.textContent = description
-  deleteIcon.textContent = '☒'
+  deleteIcon.textContent = 'X'
 
   taskCard.setAttribute('draggable', true)
   taskCard.setAttribute('task-id', taskId)

@@ -4,7 +4,7 @@
  * Copyright 2011-2019 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
-:root {
+ :root {
   --blue: #6777EF;
   --indigo: #6610f2;
   --purple: #6f42c1;
@@ -97,6 +97,7 @@ h6 {
 p {
   margin-top: 0;
   margin-bottom: 1rem;
+  margin-right: 30px;
 }
 
 abbr[title],
@@ -169,13 +170,13 @@ sup {
 }
 
 a {
-  color: #6777EF;
+  color: #757575;
   text-decoration: none;
   background-color: transparent;
 }
 
 a:hover {
-  color: #224abe;
+  color: #c3baa0;
   text-decoration: underline;
 }
 
@@ -421,7 +422,7 @@ h5,
 
 h6,
 .h6 {
-  font-size: 1rem;
+  font-size: 1.2rem;
 }
 
 .lead {

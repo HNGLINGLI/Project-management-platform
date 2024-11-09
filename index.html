@@ -115,16 +115,15 @@
     </div>
   
     <div class="row mb-3">
-        <div class="col-xl-12 col-md-12 mb-4">
-          <div class="card h-100">
-            <div class="kanban-card-body">
-              <div class="row">
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <div class="info-container">
+      <div class="col-xl-12 col-md-12 mb-4">
+        <div class="card h-100">
+          <!-- Card Header with title, description, and input form -->
+          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <div class="info-container">
               <h1>Kanban Board</h1>
               <p>A place to organize tasks to completion as well as add new ones and delete old ones.</p>
             </div>
-            <form class="input-container" onsubmit="return addTask(event);">
+            <form class="kanban-section input-container" onsubmit="return addTask(event);">
               <div class="fields">
                 <input id="title" placeholder="title..." required />
                 <input id="description" placeholder="description..." required />
@@ -132,22 +131,23 @@
               <input type="submit" id="submit-button" value="Add Task" />
             </form>
           </div>
-  
+    
           <!-- Card Body for the Kanban Columns -->
           <div class="kanban-card-body">
+            <div class="row">
             <section class="column-container">
               <div class="task-column" id="backlog">
                 <h3>( ◡̀_◡́)ᕤ To-do</h3>
                 <hr class="custom-hr" />
                 <div class="task-list"></div>
               </div>
-  
+    
               <div class="task-column" id="doing">
                 <h3>ᕙ⁠(⁠⇀⁠‸⁠↼⁠‶⁠)⁠ᕗ Doing</h3>
                 <hr class="custom-hr" />
                 <div class="task-list"></div>
               </div>
-  
+    
               <div class="task-column" id="done">
                 <h3>✧ദ്ദി ˉ͈̀꒳ˉ͈́ )✧ Done</h3>
                 <hr class="custom-hr" />
@@ -157,8 +157,7 @@
           </div>
         </div>
       </div>
-    </div>
-  </div>
+    </div>    
 
             <!-- Area Chart -->
             <div class="col-xl-8 col-lg-7">

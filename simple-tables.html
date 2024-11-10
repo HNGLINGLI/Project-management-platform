@@ -108,14 +108,25 @@
           </ul>
         </nav>
         <!-- Topbar -->
-        <!-- Container Fluid-->
-        <div class="container-fluid" id="container-wrapper">
-          <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Status tables</h1>
-          </div>
+       <!-- Container Fluid -->
+<div class="container-fluid" id="container-wrapper">
+  <!-- Row for Button and Table Content -->
+  <div class="row">
+    <div class="col-lg-12 mb-4 d-flex align-items-center justify-content-between">
+      <!-- Status Tables Header Row -->
+      <div class="d-sm-flex align-items-start">
+        <h1 class="h3 mb-0 text-gray-800">Status Tables</h1>
+      </div>
+      <!-- Big Button aligned on the right with spacing -->
+      <div>
+        <button type="button" class="btn btn-primary btn-lg ms-3" data-toggle="modal" data-target="#createProjectModal">
+          + Create New Project
+        </button>
+      </div>
+    </div>
 
-          <div class="row">
-            <div class="col-lg-12 mb-4">
+    <div class="col-lg-12 mb-4">
+
               <!-- Simple Tables -->
               <div class="card">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -125,20 +136,20 @@
                   <table class="table align-items-center table-flush">
                     <thead class="thead-light">
                       <tr>
-                        <th>Order ID</th>
-                        <th>Customer</th>
-                        <th>Item</th>
+                        <th>Project ID</th>
+                        <th>Engineer</th>
+                        <th>Project Name</th>
                         <th>Status</th>
-                        <th>Action</th>
+                        <th></th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
-                        <td><a href="#">RA0449</a></td>
+                        <td><a href="#" title="Download project details">RA0449</a></td>
                         <td>Udin Wayang</td>
                         <td>Nasi Padang</td>
                         <td><span class="badge badge-success">Delivered</span></td>
-                        <td><a href="#" class="btn btn-sm btn-primary">Detail</a></td>
+                        <td><a href="#" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#detailModal">Detail</a></td>
                       </tr>
                       <tr>
                         <td><a href="#">RA5324</a></td>
@@ -176,6 +187,111 @@
             </div>
           </div>
           <!--Row-->
+
+          <!-- Detail Modal -->
+<div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="detailModalLabel">Project Name</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div>
+          <h6>Latest Report</h6>
+          <p id="latest-report">No recent report available.</p>
+        </div>
+        <hr>
+        <div>
+          <h6>Engineer Notes</h6>
+          <p id="engineer-notes">No notes provided.</p>
+        </div>
+        <div id="see-more-section" class="d-none">
+          <hr>
+          <h6>Additional Details</h6>
+          <p>Last Report: <a href="#" id="last-report-link">Click here to see the last report</a></p>
+        </div>
+        <button id="see-more-btn" class="btn" style="background-color: #007bff; color: white; font-size: 1rem; border: none; padding: 5px 10px; cursor: pointer; transition: background-color 0.3s ease;">
+          See more
+        </button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- create project modal Structure -->
+<div class="modal fade" id="createProjectModal" tabindex="-1" aria-labelledby="createProjectModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="createProjectModalLabel">Create New Project</h5>
+        <!-- Close button with the 'X' icon -->
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span> <!-- "X" symbol -->
+        </button>
+      </div>
+      <div class="modal-body">
+          <form>
+          <!-- Project ID -->
+          <div class="mb-3">
+            <label for="projectId" class="form-label">Project ID</label>
+            <input type="text" class="form-control" id="projectId" required>
+          </div>
+
+          <!-- Project Name -->
+          <div class="mb-3">
+            <label for="projectName" class="form-label">Project Name</label>
+            <input type="text" class="form-control" id="projectName" required>
+          </div>
+
+          <!-- Project Description -->
+          <div class="mb-3">
+            <label for="projectName" class="form-label">Project Description</label>
+            <input type="text" class="form-control" id="projectDescription" required>
+          </div>
+
+          <!-- Assigned Engineers (multi-select) -->
+          <div class="mb-3">
+            <label for="assignedEngineers" class="form-label">Assigned Engineers</label>
+            <select multiple class="form-control" id="assignedEngineers">
+              <!-- will be populated by using mysql database -->
+              <option>Engineer 1</option>
+              <option>Engineer 2</option>
+              <option>Engineer 3</option>
+              <option>Engineer 4</option>
+            </select>
+          </div>
+
+          <!-- Project Status -->
+          <div class="mb-3">
+            <label for="projectStatus" class="form-label">Status</label>
+            <select class="form-control" id="projectStatus">
+              <option>Not Started</option>
+              <option>In Progress</option>
+            </select>
+          </div>
+
+          <!-- Urgent Checkbox -->
+          <div class="form-check mb-3">
+            <input class="form-check-input" type="checkbox" id="urgent">
+            <label class="form-check-label" for="urgent">
+              Mark as Urgent
+            </label>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save Project</button>
+      </div>
+    </div>
+  </div>
+</div>
 
           <!-- Documentation Link -->
           <div class="row">

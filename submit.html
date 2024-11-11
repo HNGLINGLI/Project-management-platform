@@ -10,7 +10,7 @@
   <link href="img/logo.png" rel="icon">
   <title>Project Management</title>
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="vendor/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
   <link href="css/project-management.css" rel="stylesheet">
 </head>
 
@@ -50,7 +50,7 @@
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="calendar.html">
+        <a class="nav-link" href="calendar.php">
           <i class="fas fa-fw fa-calendar"></i>
           <span>Calendar</span>
         </a>
@@ -106,15 +106,16 @@
           </ul>
         </nav>
         <!-- Topbar -->
-        <div class="row">
-          <!-- Container Fluid-->
-        <div class="container-fluid" id="container-wrapper">
-          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <!-- Container Fluid -->
+<div class="container-fluid" id="container-wrapper">
+  <!-- Row for Button and Table Content -->
+  <div class="row">
+    <div class="col-lg-12 mb-4 d-flex align-items-center justify-content-between">
+      <div class="col-lg-12 mb-4">
           <!-- Work Progress Submission Card -->
-          <div class="col-lg-7 mb-4">
             <div class="card shadow mb-4">
               <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Project Assignment & Progress Update</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Project Assignment & Update</h6>
               </div>
               <div class="card-body">
                 <form onsubmit="return submitProgress(event);">
@@ -167,30 +168,13 @@
                 </form>
               </div>
             </div>
-          </div>
-        
-          <!-- Project History or Notifications Card -->
-          <div class="col-lg-5 mb-1">
-            <div class="card shadow mb-4">
-              <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Project History / Notifications</h6>
-              </div>
-              <div class="card-body">
-                <ul>
-                  <li>Project milestone 1: Completed</li>
-                  <li>Task 2: Pending approval from manager</li>
-                  <li>Deadline for task 3: <strong>Nov 20, 2024</strong></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
         
         <!-- Documentation Link -->
         <div class="row">
           <div class="col-lg-12 text-center">
             <p>© 2024 黃伶俐/Cindy</p>
           </div>
+        </div>
 
         <!---Container Fluid-->
       </div>

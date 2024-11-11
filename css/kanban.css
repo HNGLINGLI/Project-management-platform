@@ -32,7 +32,8 @@
   margin: 10px 30px;
 }
 
-.kanban-card-body header .input-container {
+/* Input Container */
+.kanban-section .input-container {
   margin: 0 30px;
   margin-top: 20px;
   padding: 10px;
@@ -44,13 +45,13 @@
   max-width: calc(100% - 60px);
 }
 
-.kanban-card-body .fields {
+.kanban-section .fields {
   display: flex;
   flex-direction: column;
 }
 
-.kanban-card-body .fields #title,
-.kanban-card-body .fields #description {
+.kanban-section .fields #title,
+.kanban-section .fields #description {
   width: 400px;
   border: 2px solid #b9ada2; 
   padding: 15px;
@@ -61,18 +62,18 @@
   margin-bottom: 15px;
 }
 
-.kanban-card-body .fields #title:focus,
-.kanban-card-body .fields #description:focus {
+.kanban-section .fields #title:focus,
+.kanban-section .fields #description:focus {
   border-color: #b9ada2; 
   box-shadow: 0 0 5px rgba(255, 111, 97, 0.5); 
 }
 
-.kanban-card-body .input-container input[type="submit"] {
-  width: 100px; 
-  border: none;
-  background-color: #b9ada2; 
-  color: #ffffff; 
-  border-radius: 10px; 
+.kanban-section .input-container input[type="submit"] {
+  width: 100px !important; 
+  border: none !important;
+  background-color: #b9ada2 !important; 
+  color: #ffffff !important; 
+  border-radius: 10px !important; 
   padding: 10px 15px; 
   cursor: pointer; 
   font-weight: normal; 
@@ -80,13 +81,13 @@
 }
 
 /* Hover effect */
-.kanban-card-body .input-container input[type="submit"]:hover {
+.kanban-section .input-container input[type="submit"]:hover {
   background-color: #938275; 
   transform: scale(1.05); 
 }
 
 /* Active effect */
-.kanban-card-body .input-container input[type="submit"]:active {
+.kanban-section .input-container input[type="submit"]:active {
   transform: scale(0.95); 
 }
 
@@ -96,10 +97,11 @@
   justify-content: space-around;
   flex-direction: row;
   margin-top: 10px;
+  gap: 10px;
 }
 
 .kanban-card-body .task-column {
-  flex: 1;
+  flex: 1 1 300px;
   color: #ffffff;
   background-color: rgba(255, 255, 255, 0.2);
   border-radius: 16px;
@@ -107,7 +109,7 @@
   border: 1px solid rgba(0, 0, 0, 0.1);
   padding: 20px;
   margin: 0 10px;
-  max-width: 400px;
+  max-width: 100%;
 }
 
 .kanban-card-body .task-column h3 {
@@ -141,12 +143,20 @@
   padding: 10px 15px; 
   display: flex;
   justify-content: space-between; 
-  align-items: center; 
+  align-items: top; 
 }
 
 .kanban-card-body .task-header h4 {
   margin: 0; 
   font-size: 1.2rem; 
+}
+
+.task-header p:last-child {
+  cursor: pointer;
+  margin-left: auto; 
+  color: white;
+  font-weight: bold;
+  text-align: right; 
 }
 
 .kanban-card-body .task-description-container {
@@ -165,4 +175,61 @@
   border-radius: 10px;
   padding: 10px 20px;
   color: #ffffff;
+}
+
+/* For phones and smaller screens (max-width: 480px) */
+@media (max-width: 480px) {
+  .kanban-card-body {
+    display: none; 
+  }
+
+  .card-header {
+    display: none; 
+  }
+
+  .info-container {
+    display: none; 
+  }
+
+  .input-container {
+    display: none; 
+  }
+}
+
+/* For tablets (min-width: 481px and max-width: 1024px) */
+@media (min-width: 481px) and (max-width: 1024px) {
+  .kanban-card-body {
+    display: block; 
+  }
+
+  .card-header {
+    display: block; 
+  }
+
+  .info-container {
+    display: block;
+  }
+
+  .input-container {
+    display: block; 
+  }
+}
+
+/* For larger screens (min-width: 1025px) */
+@media (min-width: 1025px) {
+  .kanban-card-body {
+    display: block; 
+  }
+
+  .card-header {
+    display: block; 
+  }
+
+  .info-container {
+    display: block; 
+  }
+
+  .input-container {
+    display: block; 
+  }
 }

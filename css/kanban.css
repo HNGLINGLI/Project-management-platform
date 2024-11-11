@@ -188,7 +188,7 @@
   }
 
   .info-container {
-    display: none; 
+    display: show; 
   }
 
   .input-container {
@@ -207,7 +207,7 @@
   }
 
   .info-container {
-    display: block;
+    display: show;
   }
 
   .input-container {
@@ -226,7 +226,7 @@
   }
 
   .info-container {
-    display: block; 
+    display: show; 
   }
 
   .input-container {

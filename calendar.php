@@ -9,15 +9,18 @@
   <meta name="author" content="">
   <link href="img/logo.png" rel="icon">
   <title>Project Management</title>
+  <link rel="stylesheet" href="css/calendarstyle.css"> <!-- Link to the CSS file -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMYBmlrS8eV67/m2MY1nH0o2ZgJZxZ3L5DZrV" crossorigin="anonymous">
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <link href="css/project-management.css" rel="stylesheet">
+  <script defer src="js/calendarscript.js"></script> <!-- Link to the JavaScript file -->
 </head>
 
 <body id="page-top">
   <div id="wrapper">
     <!-- Sidebar -->
-    <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
+<ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
         <div class="sidebar-brand-icon">
           <img src="img/logo.png">
@@ -25,7 +28,7 @@
         <div class="sidebar-brand-text mx-3">Project Management</div>
       </a>
       <hr class="sidebar-divider my-0">
-      <li class="nav-item">
+      <li class="nav-item active">
         <a class="nav-link" href="index.html">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
@@ -38,29 +41,35 @@
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTable" aria-expanded="true"
           aria-controls="collapseTable">
-          <i class="fas fa-fw fa-table"></i>
-          <span>Tables</span>
+          <i class="fas fa-fw fa-tasks"></i>
+          <span>Management</span>
         </a>
         <div id="collapseTable" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Tables</h6>
-            <a class="collapse-item" href="simple-tables.html">Simple Tables</a>
-            <a class="collapse-item" href="datatables.html">DataTables</a>
+            <h6 class="collapse-header">管理畫面</h6>
+            <a class="collapse-item" href="simple-tables.html">Project Management</a>
+            <a class="collapse-item" href="datatables.php">Engineer Directory</a>
           </div>
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="calendar.html">
+        <a class="nav-link" href="calendar.php">
           <i class="fas fa-fw fa-calendar"></i>
-          <span>Calendar</span>
+          <span>Meetings</span>
         </a>
       </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="charts.html">
-          <i class="fas fa-fw fa-chart-area"></i>
-          <span>Charts</span>
+      <li class="nav-item">
+        <a class="nav-link" href="submit.html">
+          <i class="fas fa-fw fa-upload"></i>
+          <span>Submission</span>
         </a>
       </li>
+    <li class="nav-item">
+      <a class="nav-link" href="notif.html">
+        <i class="fas fa-fw fa-bell"></i>
+        <span>Notifications</span>
+      </a>
+    </li>
       <hr class="sidebar-divider">
     </ul>
       
@@ -93,89 +102,78 @@
                 </form>
               </div>
             </li>
-
+           
               </div>
             </li>
             <div class="topbar-divider d-none d-sm-block"></div>
               </a>
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">
                 </a>
               </div>
             </li>
           </ul>
         </nav>
         <!-- Topbar -->
-        <!-- Container Fluid-->
+        <!-- Container Fluid (Calendar Section) -->
         <div class="container-fluid" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Charts</h1>
           </div>
-          <!-- Row -->
-          <div class="row">
-            <!-- Area Charts -->
-            <div class="col-lg-12">
-              <div class="card mb-4">
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Area Chart</h6>
-                </div>
-                <div class="card-body">
-                  <div class="chart-area">
-                    <canvas id="myAreaChart"></canvas>
+
+          <!-- Calendar HTML -->
+          <div class="container">
+            <div class="form-container">
+              <h1>Schedule a Meeting</h1>
+              <form id="meeting-form">
+                  <div class="form-group">
+                      <label for="user-name">User Name:</label>
+                      <select id="user-name" required></select>
                   </div>
-                  <hr>
-                  Styling for the area chart can be found in the
-                  <code>/js/demo/chart-area-demo.js</code> file.
-                </div>
-              </div>
-            </div>
-            <!-- Bar Chart -->
-            <div class="col-lg-8">
-              <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">Bar Chart</h6>
-                </div>
-                <div class="card-body">
-                  <div class="chart-bar">
-                    <canvas id="myBarChart"></canvas>
+                  <div class="form-group">
+                      <label for="customer-name">Customer Name:</label>
+                      <input type="text" id="customer-name" required>
                   </div>
-                  <hr>
-                  Styling for the bar chart can be found in the <code>/js/demo/chart-bar-demo.js</code> file.
-                </div>
-              </div>
-            </div>
-            <!-- Donut Chart -->
-            <div class="col-lg-4">
-              <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">Donut Chart</h6>
-                </div>
-                <div class="card-body">
-                  <div class="chart-pie pt-4">
-                    <canvas id="myPieChart"></canvas>
+                  <div class="form-group">
+                      <label for="meeting-date">Date:</label>
+                      <input type="date" id="meeting-date" required>
                   </div>
-                  <hr>
-                  Styling for the donut chart can be found in the <code>/js/demo/chart-pie-demo.js</code> file.
-                </div>
-              </div>
+                  <div class="form-group">
+                      <label for="meeting-time">Time:</label>
+                      <input type="time" id="meeting-time" required>
+                  </div>
+                  <button type="submit">Schedule Meeting</button>
+              </form>
             </div>
-          </div>
+            <div class="calendar-container">
+              <h2>Meeting Calendar</h2>
+              <div id="calendar-controls">
+                <button id="prev-month" aria-label="Previous Month">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M15.5 18.5l-6.5-6.5 6.5-6.5v13z"/>
+                  </svg>
+                </button>
+                <span id="current-month-year"></span>
+                <button id="next-month" aria-label="Next Month">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M8.5 5.5l6.5 6.5-6.5 6.5v-13z"/>
+                  </svg>
+                </button>
+              </div>
+              <div id="calendar">
+                <!-- Calendar will be generated by JavaScript -->
+              </div>
+              <h2 style="margin-top: 64px">Upcoming Meetings</h2>
+              <div id="meetings-list"></div>
+            </div>
+          </div>    
           <!--Row-->
-
-          <!-- Documentation Link -->
-          <div class="row">
-            <div class="col-lg-12">
-              <p class="mb-4">Chart.js is a third party plugin that is used to generate the charts in this theme. The
-                charts below have been customized - for further customization options, please visit the <a
-                  target="_blank" href="https://www.chartjs.org/docs/latest/">official Chart.js documentation</a>.</p>
-            </div>
-          </div>
-
         </div>
-        <!---Container Fluid-->
-      </div>
-    </div>
-  </div>
+        
+        <!-- Documentation Link -->
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <p>© 2024 黃伶俐/Cindy</p>
+          </div>
+        </div>
 
   <!-- Scroll to top -->
   <a class="scroll-to-top rounded" href="#page-top">
@@ -186,13 +184,6 @@
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
   <script src="js/project-management.js"></script>
-  <!-- Page level plugins -->
-  <script src="vendor/chart.js/Chart.min.js"></script>
-  <!-- Page level custom scripts -->
-  <script src="js/demo/chart-area-demo.js"></script>
-  <script src="js/demo/chart-pie-demo.js"></script>
-  <script src="js/demo/chart-bar-demo.js"></script>
-</body>
 
 </body>
 

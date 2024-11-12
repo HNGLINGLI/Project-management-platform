@@ -39,30 +39,36 @@
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTable" aria-expanded="true"
           aria-controls="collapseTable">
-          <i class="fas fa-fw fa-table"></i>
-          <span>Tables</span>
+          <i class="fas fa-fw fa-tasks"></i>
+          <span>Management</span>
         </a>
         <div id="collapseTable" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Tables</h6>
-            <a class="collapse-item" href="simple-tables.html">Simple Tables</a>
-            <a class="collapse-item" href="datatables.php">DataTables</a>
+            <h6 class="collapse-header">管理畫面</h6>
+            <a class="collapse-item" href="simple-tables.html">Project Management</a>
+            <a class="collapse-item" href="datatables.php">Engineer Directory</a>
           </div>
         </div>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="calendar.php">
           <i class="fas fa-fw fa-calendar"></i>
-          <span>Calendar</span>
+          <span>Meetings</span>
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="submit.html">
-          <i class="fas fa-fw fa-chart-area"></i>
-          <span>Charts</span>
+          <i class="fas fa-fw fa-upload"></i>
+          <span>Submission</span>
         </a>
       </li>
-    </ul>
+    <li class="nav-item">
+      <a class="nav-link" href="notif.html">
+        <i class="fas fa-fw fa-bell"></i>
+        <span>Notifications</span>
+      </a>
+    </li>
+  </ul>
       
     <!-- Sidebar -->
     <div id="content-wrapper" class="d-flex flex-column">
@@ -160,11 +166,11 @@
       </div>
     </div>    
 
-            <!-- Student's eye check Example -->
+            <!-- Engineer project status Example -->
             <div class="col-xl-8 col-lg-7 mb-4">
               <div class="card">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Student's eye check status</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">Engineer project status</h6>
                   <a class="m-0 float-right btn btn-info btn-sm" href="simple-tables.html">View More <i
                       class="fas fa-chevron-right"></i></a>
                 </div>
@@ -172,9 +178,9 @@
                   <table class="table align-items-center table-flush">
                     <thead class="thead-light">
                       <tr>
-                        <th>Order ID</th>
-                        <th>Customer</th>
-                        <th>Item</th>
+                        <th>Project Name</th>
+                        <th>Engineer</th>
+                        <th>Project Description</th>
                         <th>Status</th>
                         
                       </tr>
@@ -229,7 +235,7 @@
                 <div class="card-footer"></div>
               </div>
             </div>
-            <!-- Message From Customer-->
+            <!-- Notification Messages-->
             <div class="col-xl-4 col-lg-5 ">
               <div class="card">
                 <div class="card-header py-4 bg-primary d-flex flex-row align-items-center justify-content-between">
@@ -237,36 +243,35 @@
                 </div>
                 <div>
                   <div class="customer-message align-items-center">
-                    <a class="font-weight-bold" href="#">
+                    <a class="font-weight-bold" href="notif.html">
                       <div class="text-truncate message-title">Hi there! I am wondering if you can help me with a
                         problem I've been having.</div>
-                      <div class="small text-gray-500 message-time font-weight-bold">Udin Cilok · 58m</div>
+                      <div class="small text-gray-500 message-time font-weight-bold">Alice · 20m</div>
                     </a>
                   </div>
                   <div class="customer-message align-items-center">
-                    <a href="#">
-                      <div class="text-truncate message-title">But I must explain to you how all this mistaken idea
+                    <a class="font-weight-bold" href="notif.html">
+                      <div class="text-truncate message-title">I have uploaded a new file into the project.
                       </div>
-                      <div class="small text-gray-500 message-time">Nana Haminah · 58m</div>
+                      <div class="small text-gray-500 message-time font-weight-bold">Grace · 30m</div>
                     </a>
                   </div>
                   <div class="customer-message align-items-center">
-                    <a class="font-weight-bold" href="#">
-                      <div class="text-truncate message-title">Lorem ipsum dolor sit amet, consectetur adipiscing elit
+                    <a class="font-weight-bold" href="notif.html">
+                      <div class="text-truncate message-title">Please help me check if the files went through.
                       </div>
-                      <div class="small text-gray-500 message-time font-weight-bold">Jajang Cincau · 25m</div>
+                      <div class="small text-gray-500 message-time font-weight-bold">Cindy · 40m</div>
                     </a>
                   </div>
                   <div class="customer-message align-items-center">
-                    <a class="font-weight-bold" href="#">
-                      <div class="text-truncate message-title">At vero eos et accusamus et iusto odio dignissimos
-                        ducimus qui blanditiis
+                    <a class="font-weight-bold" href="notif.html">
+                      <div class="text-truncate message-title">Thank you very much for this very satisfying transaction.
                       </div>
-                      <div class="small text-gray-500 message-time font-weight-bold">Udin Wayang · 54m</div>
+                      <div class="small text-gray-500 message-time font-weight-bold">David · 54m</div>
                     </a>
                   </div>
                   <div class="card-footer text-center">
-                    <a class="m-0 small text-primary card-link" href="#">View More <i
+                    <a class="m-0 small text-primary card-link" href="notif.html">View More <i
                         class="fas fa-chevron-right"></i></a>
                   </div>
                 </div>

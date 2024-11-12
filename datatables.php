@@ -17,8 +17,8 @@
 
 <body id="page-top">
   <div id="wrapper">
-    <!-- Sidebar -->
-    <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
+<!-- Sidebar -->
+<ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
         <div class="sidebar-brand-icon">
           <img src="img/logo.png">
@@ -26,7 +26,7 @@
         <div class="sidebar-brand-text mx-3">Project Management</div>
       </a>
       <hr class="sidebar-divider my-0">
-      <li class="nav-item">
+      <li class="nav-item active">
         <a class="nav-link" href="index.html">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
@@ -35,33 +35,39 @@
       <div class="sidebar-heading">
         Features
       </div>
-      
-      <li class="nav-item active">
+
+      <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTable" aria-expanded="true"
           aria-controls="collapseTable">
-          <i class="fas fa-fw fa-table"></i>
-          <span>Tables</span>
+          <i class="fas fa-fw fa-tasks"></i>
+          <span>Management</span>
         </a>
-        <div id="collapseTable" class="collapse show" aria-labelledby="headingTable" data-parent="#accordionSidebar">
+        <div id="collapseTable" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Tables</h6>
-            <a class="collapse-item" href="simple-tables.html">Simple Tables</a>
-            <a class="collapse-item active" href="datatables.html">DataTables</a>
+            <h6 class="collapse-header">管理畫面</h6>
+            <a class="collapse-item" href="simple-tables.html">Project Management</a>
+            <a class="collapse-item" href="datatables.php">Engineer Directory</a>
           </div>
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="calendar.html">
+        <a class="nav-link" href="calendar.php">
           <i class="fas fa-fw fa-calendar"></i>
-          <span>Calendar</span>
+          <span>Meetings</span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-          <i class="fas fa-fw fa-chart-area"></i>
-          <span>Charts</span>
+        <a class="nav-link" href="submit.html">
+          <i class="fas fa-fw fa-upload"></i>
+          <span>Submission</span>
         </a>
       </li>
+    <li class="nav-item">
+      <a class="nav-link" href="notif.html">
+        <i class="fas fa-fw fa-bell"></i>
+        <span>Notifications</span>
+      </a>
+    </li>
       <hr class="sidebar-divider">
     </ul>
       
@@ -113,16 +119,13 @@
               <!-- Replace DataTables heading with the form to add a new member -->
               <div class="col-lg-12 mb-4">
                   <h6 class="m-0 font-weight-bold text-primary">Add New Member</h6>
-                  <form action="test/add_engineers.php" method="POST">
+                  <form id="addEngineerForm" method="POST">
                   <div class="form-row">
                     <div class="form-group col-md-2">
                         <input type="text" id="name" name="name" class="form-control" placeholder="Name" required>
                     </div>
-                    <div class="form-group col-md-2">
+                    <div class="form-group col-md-3">
                         <input type="text" id="position" name="position" class="form-control" placeholder="Position" required>
-                    </div>
-                    <div class="form-group col-md-1">
-                        <input type="text" id="office" name="office" class="form-control" placeholder="Office" required>
                     </div>
                     <div class="form-group col-md-1">
                         <input type="number" id="age" name="age" class="form-control" placeholder="Age" required>
@@ -149,56 +152,57 @@
                 </div>
                 <div class="table-responsive p-3">
                   <table class="table align-items-center table-flush table-hover" id="dataTableHover">
-                    <thead class="thead-light">
-                      <tr>
-                        <th>Name</th>
-                        <th>Position</th>
-                        <th>Office</th>
-                        <th>Age</th>
-                        <th>Start date</th>
-                        <th>Salary</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        // Include database connection
-                        include 'test/manage_engineers.php';
-      
-                        // Query to select data
-                        $sql = "SELECT name, position, office, age, start_date, salary FROM Engineers";
-                        $result = $conn->query($sql);
-      
-                        // Check if there are results
-                        if ($result->num_rows > 0) {
-                            // Output data of each row
-                            while($row = $result->fetch_assoc()) {
-                                echo "<tr>";
-                                echo "<td>" . htmlspecialchars($row['name']) . "</td>";
-                                echo "<td>" . htmlspecialchars($row['position']) . "</td>";
-                                echo "<td>" . htmlspecialchars($row['office']) . "</td>";
-                                echo "<td>" . htmlspecialchars($row['age']) . "</td>";
-                                echo "<td>" . htmlspecialchars($row['start_date']) . "</td>";
-                                echo "<td>" . htmlspecialchars(number_format($row['salary'], 2)) . "</td>";
-                                echo "</tr>";
-                            }
-                        } else {
-                            echo "<tr><td colspan='6'>No records found</td></tr>";
-                        }
-      
-                        // Close connection
-                        $conn->close();
-                        ?>
-                      </tbody>
-                    <tfoot>
-                      <tr>
-                        <th>Name</th>
-                        <th>Position</th>
-                        <th>Office</th>
-                        <th>Age</th>
-                        <th>Start date</th>
-                        <th>Salary</th>
-                      </tr>
-                    </tfoot>
+                  <thead class="thead-light">
+  <tr>
+    <th>Name</th>
+    <th>Position</th>
+    <th>Age</th>
+    <th>Start date</th>
+    <th>Salary</th>
+    <th></th>
+  </tr>
+</thead>
+<tbody>
+  <?php
+  include 'test/manage_engineers.php';
+  
+  $sql = "SELECT engineer_id, name, position, age, start_date, salary FROM Engineers";
+  $result = $conn->query($sql);
+
+  // <a href='test/edit_engineers.php?id=" . $row['engineer_id'] . "' class='btn btn-sm btn-warning' data-toggle='modal' data-target='#editEngineer'>Edit</a>
+
+  if ($result->num_rows > 0) {
+      while($row = $result->fetch_assoc()) {
+          echo "<tr>";
+          echo "<td>" . htmlspecialchars($row['name']) . "</td>";
+          echo "<td>" . htmlspecialchars($row['position']) . "</td>";
+          echo "<td>" . htmlspecialchars($row['age']) . "</td>";
+          echo "<td>" . htmlspecialchars($row['start_date']) . "</td>";
+          echo "<td>" . htmlspecialchars(number_format($row['salary'], 2)) . "</td>";
+          echo "<td>
+                  <a href='#' data-id='".$row['engineer_id']."' data-name='".$row['name']."' data-position='".$row['position']."' data-age='".$row['age']."' data-start_date='".$row['start_date']."' data-salary='".$row['salary']."' class='editEngineer btn btn-sm btn-warning' data-toggle='modal' data-target='#editEngineer'>Edit</a>
+                  <a href='#' data-id='".$row['engineer_id']."' class='deleteEngineer btn btn-sm btn-danger'>Delete</a>
+                </td>";
+          echo "</tr>";
+      }
+  } else {
+      echo "<tr><td colspan='6'>No records found</td></tr>";
+  }
+
+  $conn->close();
+  ?>
+</tbody>
+<tfoot>
+  <tr>
+    <th>Name</th>
+    <th>Position</th>
+    <th>Age</th>
+    <th>Start date</th>
+    <th>Salary</th>
+    <th></th>
+  </tr>
+</tfoot>
+
                   </table>
                 </div>
               </div>
@@ -219,6 +223,51 @@
     <i class="fas fa-angle-up"></i>
   </a>
 
+  <div class="modal fade" id="editEngineer" tabindex="-1" role="dialog" aria-labelledby="editEngineerLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editEngineerLabel">Edit Engineer</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form">
+            <div class="form-group" hidden>
+                <label for="editId">ID</label>
+                <input type="text" id="editId" name="id" class="form-control" placeholder="id" required disabled>
+            </div>
+            <div class="form-group">
+                <label for="editName">Name</label>
+                <input type="text" id="editName" name="name" class="form-control" placeholder="Name" required>
+            </div>
+            <div class="form-group">
+                <label for="editPosition">Position</label>
+                <input type="text" id="editPosition" name="position" class="form-control" placeholder="Position" required>
+            </div>
+            <div class="form-group">
+                <label for="editAge">Age</label>
+                <input type="number" id="editAge" name="age" class="form-control" placeholder="Age" required>
+            </div>
+            <div class="form-group">
+                <label for="editStartDate">Start Date</label>
+                <input type="date" id="editStartDate" name="startDate" class="form-control" placeholder="Start Date" required>
+            </div>
+            <div class="form-group">
+                <label for="editSalary">Salary</label>
+                <input type="text" id="editSalary" name="salary" class="form-control" placeholder="Salary" required onblur="formatSalary(this)">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-custom-outline" data-dismiss="modal">Close</button>
+          <button type="button" id="postEditEngineer" class="btn btn-custom">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
@@ -227,12 +276,29 @@
   <script src="vendor/datatables/jquery.dataTables.min.js"></script>
   <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
 
-  <!-- Page level custom scripts -->
-  <script>
-    $(document).ready(function () {
-      $('#dataTableHover').DataTable(); 
+<script>
+$(document).ready(function () {
+    // Destroy the existing DataTable instance if it exists
+    if ($.fn.DataTable.isDataTable('#dataTableHover')) {
+        $('#dataTableHover').DataTable().destroy();
+    }
+    
+    // Initialize DataTable
+    $('#dataTableHover').DataTable({
+        "paging": true, 
+        "searching": true,
+        "ordering": true,
+        "lengthChange": true, 
+        "info": true,
+        "autoWidth": false,
+        "pageLength": 10,
+        "lengthMenu": [10, 25, 50, 100], 
+        "columnDefs": [
+            { "orderable": false, "targets": -1 }
+        ]
     });
-  </script>
+});
+</script>
 
   <!-- JavaScript for formatting the salary input -->
 <script>
@@ -248,6 +314,83 @@
       input.value = formattedValue;
     }
   }
+
+  $(document).ready(function() {
+    $('#addEngineerForm').on('submit', function(event) {
+      event.preventDefault(); // Prevent form from submitting normally
+
+      $.ajax({
+        url: 'test/add_engineers.php', // URL to submit the form
+        type: 'POST',
+        data: $(this).serialize(),
+        success: function(response) {
+          alert("Member added successfully!"); // Display success alert
+          $('#addEngineerForm')[0].reset(); // Clear the form fields
+          location.reload();
+        },
+        error: function(xhr, status, error) {
+          alert("An error occurred: " + error); // Display error alert if necessary
+        }
+      });
+    });
+
+    $('#postEditEngineer').on('click', function(event) {
+      event.preventDefault(); // Prevent form from submitting normally
+      id_engineer = $(this).data("id")
+
+      $.ajax({
+        url: 'test/edit_engineers.php', // URL to submit the form
+        type: 'POST',
+        data: {
+          id: $('#editId').val(),
+          name: $('#editName').val(),
+          position: $('#editPosition').val(),
+          age: $('#editAge').val(),
+          startDate: $('#editStartDate').val(),
+          salary: $('#editSalary').val(),
+        },
+        success: function(response) {
+          alert("Member updated successfully!"); // Display success alert
+          location.reload();
+        },
+        error: function(xhr, status, error) {
+          alert("An error occurred: " + error); // Display error alert if necessary
+        }
+      });
+    });
+  });
+
+  $(document).on('click', '.editEngineer', function(event) {
+    event.preventDefault(); // Prevent default behavior
+    
+    // Populate the modal fields with data from the clicked row
+    $('#editId').val($(this).data("id"));
+    $('#editName').val($(this).data("name"));
+    $('#editPosition').val($(this).data("position"));
+    $('#editAge').val($(this).data("age"));
+    $('#editStartDate').val($(this).data("start_date"));
+    $('#editSalary').val($(this).data("salary"));
+  });
+
+  $(document).on('click', '.deleteEngineer', function(event) {
+    event.preventDefault(); // Prevent form from submitting normally
+    id_engineer = $(this).data("id")
+    let confirmDelete = confirm("Are you sure you want to delete this member?");
+
+    if(confirmDelete) {
+      $.ajax({
+        url: 'test/delete_engineers.php?id=' + id_engineer, // URL to submit the form
+        type: 'GET',
+        success: function(response) {
+          alert("Member deleted successfully!"); // Display success alert
+          location.reload();
+        },
+        error: function(xhr, status, error) {
+          alert("An error occurred: " + error); // Display error alert if necessary
+        }
+      });
+    }
+  });
 </script> 
 
 </body>

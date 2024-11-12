@@ -18,57 +18,57 @@
   <div id="wrapper">
     <!-- Sidebar -->
 <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
-  <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-    <div class="sidebar-brand-icon">
-      <img src="img/logo.png">
-    </div>
-    <div class="sidebar-brand-text mx-3">Project Management</div>
-  </a>
-  <hr class="sidebar-divider my-0">
-  <li class="nav-item active">
-    <a class="nav-link" href="index.html">
-      <i class="fas fa-fw fa-tachometer-alt"></i>
-      <span>Dashboard</span></a>
-  </li>
-  <hr class="sidebar-divider">
-  <div class="sidebar-heading">
-    Features
-  </div>
-
-  <li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTable" aria-expanded="true"
-      aria-controls="collapseTable">
-      <i class="fas fa-fw fa-tasks"></i>
-      <span>Management</span>
-    </a>
-    <div id="collapseTable" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
-      <div class="bg-white py-2 collapse-inner rounded">
-        <h6 class="collapse-header">管理畫面</h6>
-        <a class="collapse-item" href="simple-tables.html">Project Management</a>
-        <a class="collapse-item" href="datatables.php">Engineer Directory</a>
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+        <div class="sidebar-brand-icon">
+          <img src="img/logo.png">
+        </div>
+        <div class="sidebar-brand-text mx-3">Project Management</div>
+      </a>
+      <hr class="sidebar-divider my-0">
+      <li class="nav-item active">
+        <a class="nav-link" href="index.html">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Dashboard</span></a>
+      </li>
+      <hr class="sidebar-divider">
+      <div class="sidebar-heading">
+        Features
       </div>
-    </div>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="calendar.php">
-      <i class="fas fa-fw fa-calendar"></i>
-      <span>Meetings</span>
-    </a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="submit.html">
-      <i class="fas fa-fw fa-upload"></i>
-      <span>Submission</span>
-    </a>
-  </li>
-<li class="nav-item">
-  <a class="nav-link" href="notif.html">
-    <i class="fas fa-fw fa-bell"></i>
-    <span>Notifications</span>
-  </a>
-</li>
-  <hr class="sidebar-divider">
-</ul>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTable" aria-expanded="true"
+          aria-controls="collapseTable">
+          <i class="fas fa-fw fa-tasks"></i>
+          <span>Management</span>
+        </a>
+        <div id="collapseTable" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">管理畫面</h6>
+            <a class="collapse-item" href="simple-tables.html">Project Management</a>
+            <a class="collapse-item" href="datatables.php">Engineer Directory</a>
+          </div>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="calendar.php">
+          <i class="fas fa-fw fa-calendar"></i>
+          <span>Meetings</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="submit.html">
+          <i class="fas fa-fw fa-upload"></i>
+          <span>Submission</span>
+        </a>
+      </li>
+    <li class="nav-item">
+      <a class="nav-link" href="submit.html">
+        <i class="fas fa-fw fa-bell"></i>
+        <span>Notifications</span>
+      </a>
+    </li>
+      <hr class="sidebar-divider">
+    </ul>
       
     <!-- Sidebar -->
     <div id="content-wrapper" class="d-flex flex-column">
@@ -134,65 +134,56 @@
     <div class="col-lg-12 mb-4">
 
               <!-- Simple Tables -->
-              <div class="card">
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Engineer project status table</h6>
-                </div>
-                <div class="table-responsive">
-                  <table class="table align-items-center table-flush">
-                    <thead class="thead-light">
-                      <tr>
-                        <th>Project Name</th>
-                        <th>Engineer</th>
-                        <th>Project Description</th>
-                        <th>Status</th>
-                        <th></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td><a href="#" title="Download project details">RA0449</a></td>
-                        <td>Udin Wayang</td>
-                        <td>Nasi Padang</td>
-                        <td><span class="badge badge-success">Delivered</span></td>
-                        <td><a href="#" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#detailModal">Detail</a></td>
-                      </tr>
-                      <tr>
-                        <td><a href="#">RA5324</a></td>
-                        <td>Jaenab Bajigur</td>
-                        <td>Gundam 90' Edition</td>
-                        <td><span class="badge badge-warning">Shipping</span></td>
-                        <td><a href="#" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#detailModal">Detail</a></td>
-                      </tr>
-                      <tr>
-                        <td><a href="#">RA8568</a></td>
-                        <td>Rivat Mahesa</td>
-                        <td>Oblong T-Shirt</td>
-                        <td><span class="badge badge-danger">Pending</span></td>
-                        <td><a href="#" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#detailModal">Detail</a></td>
-                      </tr>
-                      <tr>
-                        <td><a href="#">RA1453</a></td>
-                        <td>Indri Junanda</td>
-                        <td>Hat Rounded</td>
-                        <td><span class="badge badge-info">Processing</span></td>
-                        <td><a href="#" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#detailModal">Detail</a></td>
-                      </tr>
-                      <tr>
-                        <td><a href="#">RA1998</a></td>
-                        <td>Udin Cilok</td>
-                        <td>Baby Powder</td>
-                        <td><span class="badge badge-success">Delivered</span></td>
-                        <td><a href="#" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#detailModal">Detail</a></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div class="card-footer"></div>
-              </div>
-            </div>
-          </div>
-          <!--Row-->
+<div class="card">
+  <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+    <h6 class="m-0 font-weight-bold text-primary">Engineer project status table</h6>
+  </div>
+  <div class="table-responsive">
+    <table class="table align-items-center table-flush">
+      <thead class="thead-light">
+        <tr>
+          <th>Project Name</th>
+          <th>Engineer</th>
+          <th>Project Description</th>
+          <th>Deadline</th>
+          <th>Status</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php
+          // Example query to get project data (assuming your connection and query are set up)
+          $query = "SELECT project_name, engineer, project_description, deadline, status FROM projects";
+          $result = mysqli_query($connection, $query);
+
+          // Loop through each row of results and display it
+          while($row = mysqli_fetch_assoc($result)) {
+            echo "<tr>";
+            echo "<td><a href='#'>{$row['project_name']}</a></td>";
+            echo "<td>{$row['engineer']}</td>";
+            echo "<td>{$row['project_description']}</td>";
+            echo "<td>{$row['deadline']}</td>"; 
+            echo "<td><span class='badge badge-" . getStatusBadge($row['status']) . "'>{$row['status']}</span></td>";
+            echo "<td><a href='#' class='btn btn-sm btn-primary' data-toggle='modal' data-target='#detailModal'>Detail</a></td>";
+            echo "</tr>";
+          }
+
+          // Function to determine the badge color based on status
+          function getStatusBadge($status) {
+            switch($status) {
+              case 'Delivered': return 'success';
+              case 'Shipping': return 'warning';
+              case 'Pending': return 'danger';
+              case 'Processing': return 'info';
+              default: return 'secondary';
+            }
+          }
+        ?>
+      </tbody>
+    </table>
+  </div>
+  <div class="card-footer"></div>
+</div>
 
           <!-- Detail Modal -->
 <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
@@ -243,35 +234,40 @@
       </div>
       <div class="modal-body">
           <form>
+          <form action="add_project.php" method="POST">
           <!-- Project Name -->
           <div class="mb-3">
             <label for="projectName" class="form-label">Project Name</label>
-            <input type="text" class="form-control" id="projectName" required>
+            <input type="text" id="project_name" name="project_name" required><br>
           </div>
 
           <!-- Project Description -->
           <div class="mb-3">
             <label for="projectDescription" class="form-label">Project Description</label>
-            <input type="text" class="form-control" id="projectDescription" required>
+            <textarea id="project_description" name="project_description"></textarea><br>
           </div>
 
           <!-- Assigned Engineers (multi-select) -->
          <div class="mb-3">
            <label for="assignedEngineers" class="form-label">Assigned Engineers</label>
-           <select multiple class="form-control" id="assignedEngineers">
-         <!-- Options will be populated dynamically -->
-        </select>
+           <select id="engineer_id" name="engineer_id">
+        <!-- Options will be populated dynamically from the Engineers table -->
+    </select><br>
+       </div>
+
+       <!-- Project deadline -->
+       <div class="mb-3">
+        <label for="projectDeadline" class="form-label">Deadline</label>
+        <input type="date" id="deadline" name="deadline" required><br>
        </div>
 
           <!-- Project Status -->
           <div class="mb-3">
-            <label for="projectStatus" class="form-label">Status</label>
-            <select class="form-control" id="projectStatus">
-              <option>Not Started</option>
-              <option>In Progress</option> 
-            </select>
-          </div>
-
+          <select id="status" name="status">
+        <option value="Not Started">Not Started</option>
+        <option value="In Progress">In Progress</option>
+        <option value="Pending">Pending</option>
+        </select><br>
           <!-- Urgent Checkboodalx -->
           <div class="form-check mb-3">
             <input class="form-check-input" type="checkbox" id="urgent">
@@ -283,7 +279,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save Project</button>
+        <button type="button" input type="submit" value="Create Project" class="btn btn-primary" onclick="submitForm()">Create Project</button>
       </div>
     </div>
   </div>

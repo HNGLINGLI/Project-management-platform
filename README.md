@@ -38,7 +38,7 @@ CREATE TABLE Engineers (
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/hnglingli/Project-management-platform.git
+   git clone https://github.com/hnglingli/Project-management-system.git
    ```
 
 ## Demo

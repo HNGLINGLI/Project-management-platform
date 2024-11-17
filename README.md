@@ -2,11 +2,13 @@
 
 A web-based project management system designed to track engineers, manage project progress, and provide notifications for assistance needs. This system allows for efficient project tracking, communication, and reporting within a project-oriented organization.
 
-## Technologies
+### Technologies Used
 
-- **MySQL**: Database management system
-- **PHP, HTML, CSS, and JavaScript**: Technologies for frontend and backend development
-- **Bootstrap and DataTables**: Libraries for enhanced user experience and data handling
+- **MySQL**: Core database for secure storage and efficient handling of project and engineer data.
+- **PHP**: Backend server logic for data processing, form handling, and MySQL interaction.
+- **HTML, CSS, JavaScript**: Structure, style, and interactive features, including drag-and-drop and dynamic updates.
+- **Bootstrap**: Responsive, mobile-friendly design with a consistent, modern look.
+- **DataTables**: Enhanced data display with pagination, sorting, and filtering for easy data navigation.
 
 # Project Features
 

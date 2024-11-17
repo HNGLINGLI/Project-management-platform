@@ -19,7 +19,7 @@
   <div id="wrapper">
     <!-- Sidebar -->
     <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
         <div class="sidebar-brand-icon">
           <img src="img/logo.png">
         </div>
@@ -27,7 +27,7 @@
       </a>
       <hr class="sidebar-divider my-0">
       <li class="nav-item active">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="index.php">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
       </li>
@@ -45,7 +45,7 @@
         <div id="collapseTable" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">管理畫面</h6>
-            <a class="collapse-item" href="simple-tables.html">Project Management</a>
+            <a class="collapse-item" href="simple-tables.php">Project Management</a>
             <a class="collapse-item" href="datatables.php">Engineer Directory</a>
           </div>
         </div>
@@ -57,7 +57,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="submit.html">
+        <a class="nav-link" href="submit.php">
           <i class="fas fa-fw fa-upload"></i>
           <span>Submission</span>
         </a>
@@ -88,13 +88,11 @@
                 aria-labelledby="searchDropdown">
                 <form class="navbar-search">
                   <div class="input-group">
-                    <input type="text" class="form-control bg-light border-1 small" placeholder="What do you want to look for?"
-                      aria-label="Search" aria-describedby="basic-addon2" style="border-color: #615751;">
-                    <div class="input-group-append">
-                      <button class="btn btn-primary" type="button">
-                        <i class="fas fa-search fa-sm"></i>
-                      </button>
-                    </div>
+                    <input type="text" id="searchInput" 
+                           class="form-control bg-light border-1 small"
+                           placeholder="Type to search..." 
+                           aria-label="Search" 
+                           style="border-color: #615751;">
                   </div>
                 </form>
               </div>
@@ -171,7 +169,7 @@
               <div class="card">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                   <h6 class="m-0 font-weight-bold text-primary">Engineer project status</h6>
-                  <a class="m-0 float-right btn btn-info btn-sm" href="simple-tables.html">View More <i
+                  <a class="m-0 float-right btn btn-info btn-sm" href="simple-tables.php">View More <i
                       class="fas fa-chevron-right"></i></a>
                 </div>
                 <div class="table-responsive">
@@ -181,54 +179,47 @@
                         <th>Project Name</th>
                         <th>Engineer</th>
                         <th>Project Description</th>
-                        <th>Status</th>
-                        
+                        <th>Phase</th>
+                        <th>Deadline</th>
                       </tr>
                     </thead>
-                    <tbody>
-                      <tr>
+                    <tbody id="project-list">
+                      <!-- <tr>
                         <td><a href="#">RA0449</a></td>
                         <td>Udin Wayang</td>
                         <td>Nasi Padang</td>
-                        <td><span class="badge badge-success">Delivered</span></td>
-                        
+                        <td><span class="badge badge-success">Delivered</span></td>                        
                       </tr>
                       <tr>
                         <td><a href="#">RA5324</a></td>
                         <td>Jaenab Bajigur</td>
                         <td>Gundam 90' Edition</td>
-                        <td><span class="badge badge-warning">Shipping</span></td>
-                        
+                        <td><span class="badge badge-warning">Shipping</span></td>                        
                       </tr>
                       <tr>
                         <td><a href="#">RA8568</a></td>
                         <td>Rivat Mahesa</td>
                         <td>Oblong T-Shirt</td>
-                        <td><span class="badge badge-danger">Pending</span></td>
-                        
+                        <td><span class="badge badge-danger">Pending</span></td>                        
                       </tr>
                       <tr>
                         <td><a href="#">RA1453</a></td>
                         <td>Indri Junanda</td>
                         <td>Hat Rounded</td>
-                        <td><span class="badge badge-info">Processing</span></td>
-                        
+                        <td><span class="badge badge-info">Processing</span></td>                        
                       </tr>
                       <tr>
                         <td><a href="#">RA1998</a></td>
                         <td>Udin Cilok</td>
                         <td>Baby Powder</td>
-                        <td><span class="badge badge-success">Delivered</span></td>
-                        
+                        <td><span class="badge badge-success">Delivered</span></td>                        
                       </tr>
                       <tr>
                         <td><a href="#">RB2000</a></td>
                         <td>Cindy Huang</td>
                         <td>Baby Powder</td>
-                        <td><span class="badge badge-success">Delivered</span></td> 
-
-                     </tr>
-                     <tr>
+                        <td><span class="badge badge-success">Delivered</span></td>
+                      </tr> -->
                     </tbody>
                   </table>
                 </div>
@@ -296,6 +287,54 @@
   <script src="vendor/chart.js/Chart.min.js"></script>
   <script src="js/demo/chart-area-demo.js"></script>
   <script src="js/kanban.js"></script>  
+
+<script>
+  function highlightText() {
+    const input = document.getElementById("searchInput").value.toLowerCase();
+    
+    // Select all elements inside the container you want to search in
+    const contentElements = document.querySelectorAll(".info-container p, .card-header p, .content p");
+  
+  
+    contentElements.forEach(element => {
+      // Remove existing highlights
+      element.innerHTML = element.textContent;
+  
+      // Highlight matched text if input exists
+      if (input && element.textContent.toLowerCase().includes(input)) {
+        const regex = new RegExp(`(${input})`, 'gi');
+        element.innerHTML = element.textContent.replace(regex, '<span class="highlight">$1</span>');
+      }
+    });
+  }
+
+  $(document).ready(function() {
+      $.ajax({
+        url: 'php/read_projects.php',
+        type: 'GET',
+        dataType: 'json',
+        success: function(response) {
+          const projectList = $('#project-list');
+          projectList.empty(); // Clear the existing list
+          response.forEach(project => {
+            projectList.append(`
+              <tr>
+                <td>${project.project_name}</td>
+                <td>${project.engineer_name}</td>
+                <td>${project.description}</td>
+                <td><span class="badge badge-${project.phase === 'Urgent' ? 'danger' : 'primary'}">${project.phase}</span></td>
+                <td>${project.deadline}</td>
+              </tr>`
+            );
+          });
+        },
+        error: function(xhr, status, error) {
+          alert("An error occurred: " + error); // Display error alert
+        }
+      });
+    });
+</script>
+
 </body>
 
 </html>

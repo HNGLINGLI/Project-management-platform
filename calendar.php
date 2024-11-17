@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="css/calendarstyle.css"> <!-- Link to the CSS file -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMYBmlrS8eV67/m2MY1nH0o2ZgJZxZ3L5DZrV" crossorigin="anonymous">
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="vendor/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
   <link href="css/project-management.css" rel="stylesheet">
   <script defer src="js/calendarscript.js"></script> <!-- Link to the JavaScript file -->
 </head>
@@ -21,7 +21,7 @@
   <div id="wrapper">
     <!-- Sidebar -->
 <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
         <div class="sidebar-brand-icon">
           <img src="img/logo.png">
         </div>
@@ -29,7 +29,7 @@
       </a>
       <hr class="sidebar-divider my-0">
       <li class="nav-item active">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="index.php">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
       </li>
@@ -47,7 +47,7 @@
         <div id="collapseTable" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">管理畫面</h6>
-            <a class="collapse-item" href="simple-tables.html">Project Management</a>
+            <a class="collapse-item" href="simple-tables.php">Project Management</a>
             <a class="collapse-item" href="datatables.php">Engineer Directory</a>
           </div>
         </div>
@@ -59,7 +59,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="submit.html">
+        <a class="nav-link" href="submit.php">
           <i class="fas fa-fw fa-upload"></i>
           <span>Submission</span>
         </a>
@@ -91,8 +91,8 @@
                 aria-labelledby="searchDropdown">
                 <form class="navbar-search">
                   <div class="input-group">
-                    <input type="text" class="form-control bg-light border-1 small" placeholder="What do you want to look for?"
-                      aria-label="Search" aria-describedby="basic-addon2" style="border-color: #3f51b5;">
+                  <input type="text" id="search-meetings" class="form-control bg-light border-1 small" placeholder="What do you want to look for?"
+                      aria-label="Search" aria-describedby="basic-addon2" style="border-color: #615751;">
                     <div class="input-group-append">
                       <button class="btn btn-primary" type="button">
                         <i class="fas fa-search fa-sm"></i>
@@ -184,6 +184,67 @@
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
   <script src="js/project-management.js"></script>
+
+  <script>
+    $(document).ready(function() {
+      $('#postEditMeeting').on('click', function(event) {
+        event.preventDefault(); // Prevent form from submitting normally
+
+        $.ajax({
+          url: 'php/update_meeting.php', // URL to submit the form
+          type: 'POST',
+          data: {
+            meeting_id: $('#editId').val(),
+            customer_name: $('#editCustomer').val(),
+            meeting_date: $('#editDate').val(),
+            meeting_time: $('#editTime').val()
+          },
+          success: function(response) {
+            alert("Meeting updated successfully!"); // Display success alert
+            location.reload();
+          },
+          error: function(xhr, status, error) {
+            alert("An error occurred: " + error); // Display error alert if necessary
+          }
+        });
+      });
+    });
+
+    $(document).on('click', '.editMeeting', function(event) {
+      event.preventDefault(); // Prevent default behavior
+        
+        // Populate the modal fields with data from the clicked row
+        $('#editId').val($(this).data("id"));
+        $('#editEngineer').val($(this).data("engineer"));
+        $('#editCustomer').val($(this).data("customer"));
+        $('#editDate').val($(this).data("date"));
+        $('#editTime').val($(this).data("time"));
+      });
+
+      document.addEventListener('DOMContentLoaded', () => {
+      // Load meetings initially
+      loadMeetings();
+
+      // Get the search input element
+      const searchInput = document.getElementById('search-meetings');
+
+      // Add event listener for input event
+      searchInput.addEventListener('input', function(event) {
+          const searchText = event.target.value.toLowerCase(); // Get the search text in lowercase
+          const meetingItems = document.querySelectorAll('#meetings-list .meeting-item');
+
+          // Loop through all meeting items and show/hide based on search text
+          meetingItems.forEach(item => {
+              const textContent = item.textContent.toLowerCase(); // Get the text content of the meeting item
+              if (textContent.includes(searchText)) {
+                  item.style.display = ''; // Show the item
+              } else {
+                  item.style.display = 'none'; // Hide the item
+              }
+          });
+      });
+    });
+  </script>
 
 </body>
 

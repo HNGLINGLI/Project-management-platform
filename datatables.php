@@ -19,7 +19,7 @@
   <div id="wrapper">
 <!-- Sidebar -->
 <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
         <div class="sidebar-brand-icon">
           <img src="img/logo.png">
         </div>
@@ -27,7 +27,7 @@
       </a>
       <hr class="sidebar-divider my-0">
       <li class="nav-item active">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="index.php">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
       </li>
@@ -45,7 +45,7 @@
         <div id="collapseTable" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">管理畫面</h6>
-            <a class="collapse-item" href="simple-tables.html">Project Management</a>
+            <a class="collapse-item" href="simple-tables.php">Project Management</a>
             <a class="collapse-item" href="datatables.php">Engineer Directory</a>
           </div>
         </div>
@@ -57,7 +57,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="submit.html">
+        <a class="nav-link" href="submit.php">
           <i class="fas fa-fw fa-upload"></i>
           <span>Submission</span>
         </a>
@@ -89,8 +89,8 @@
                 aria-labelledby="searchDropdown">
                 <form class="navbar-search">
                   <div class="input-group">
-                    <input type="text" class="form-control bg-light border-1 small" placeholder="What do you want to look for?"
-                      aria-label="Search" aria-describedby="basic-addon2" style="border-color: #3f51b5;">
+                  <input type="text" class="form-control bg-light border-1 small" placeholder="What do you want to look for?"
+                      aria-label="Search" aria-describedby="basic-addon2" style="border-color: #615751;">
                     <div class="input-group-append">
                       <button class="btn btn-primary" type="button">
                         <i class="fas fa-search fa-sm"></i>
@@ -262,7 +262,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-custom-outline" data-dismiss="modal">Close</button>
-          <button type="button" id="postEditEngineer" class="btn btn-custom">Save changes</button>
+          <button type="button" id="postEditEngineer" class="btn btn-custom">Save Changes</button>
         </div>
       </div>
     </div>

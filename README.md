@@ -1,4 +1,4 @@
-# Project Management System
+# <img src="img/logo.png" alt="Logo" width="50" style="vertical-align: middle; margin-right: 10px;"> Project Management System
 
 A web-based project management system designed to track engineers, manage project progress, and provide notifications for assistance needs. This system allows for efficient project tracking, communication, and reporting within a project-oriented organization.
 
@@ -10,7 +10,7 @@ A web-based project management system designed to track engineers, manage projec
 - **Bootstrap**: Responsive, mobile-friendly design with a consistent, modern look.
 - **DataTables**: Enhanced data display with pagination, sorting, and filtering for easy data navigation.
 
-# Project Features
+# <img src="img/logo2.png" alt="Logo" width="50" style="vertical-align: middle; margin-right: 10px;"> Project Features
 
 ## 📊 Dashboard  
 
@@ -69,7 +69,7 @@ A web-based project management system designed to track engineers, manage projec
 - Notify users via an integrated activity feed or email alerts.  
 - Leverage backend triggers and real-time updates for seamless notifications.
 
-# Database Schema
+# <img src="img/logo.png" alt="Logo" width="50" style="vertical-align: middle; margin-right: 10px;"> Database Schema
 
 This database schema is designed to manage engineers, their projects, and related meetings within a project management system.
 
@@ -161,6 +161,12 @@ This database schema is designed to manage engineers, their projects, and relate
    - **Meetings**: Indexed by `meeting_id` and `engineer_id`, enabling efficient queries based on meeting details and engineer associations.
    - **Projects**: Indexed by `project_id`.
    - **Project Engineers**: Composite index on `project_id` and `engineer_id` enables efficient retrieval of engineers assigned to projects.
+  
+## Database Schema Diagram
+
+Below is the visual representation of the database schema for the Project Management System:
+
+![Project Management System Database Schema](img/Project%20management%20system%20database%20schema.png)
 
 ## Installation
 

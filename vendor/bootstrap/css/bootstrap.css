@@ -11364,8 +11364,9 @@ button.bg-dark:focus {
 
 .text-truncate {
   overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  white-space: normal; 
+  word-wrap: break-word; 
+  word-break: break-word;
 }
 
 .text-left {

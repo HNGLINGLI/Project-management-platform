@@ -217,17 +217,28 @@
           <h6>Engineer Notes</h6>
           <p id="engineer-notes">No notes provided.</p>
         </div>
-        <!-- <div id="see-more-section" class="d-none">
-          <hr>
-          <h6>Additional Details</h6>
-          <p>Last Report: <a href="#" id="last-report-link">Click here to see the last report</a></p>
-        </div>
-        <button id="see-more-btn" class="btn" style="background-color: #ffffff; color: rgb(169, 81, 81); font-size: 1rem; border: none; padding: 5px 10px; cursor: pointer; transition: background-color 0.3s ease;">
-          See more >>
-        </button> -->
+        <div id="see-more-section">
+  <hr>
+  <h6>Additional Details</h6>
+  <p>Last Report: <a href="#" title="Data not available!" id="last-report-link"><strong>Click here to see the newest report</strong></a></p>
+</div>
+<button 
+  id="see-more-btn" 
+  class="btn" 
+  title="Data also not available!" 
+  style="background-color: #ffffff; color: rgb(169, 81, 81); font-size: 1rem; border: none; padding: 5px 10px; cursor: pointer; transition: background-color 0.3s ease;"
+>
+  See more >>
+</button>
+
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+  <div class="modal-note">
+    <p class="text-muted mb-0 text-left" style="font-size: 0.85rem;">
+      <em>Note: File submission and database functionality are not implemented. Submissions cannot be viewed.</em>
+    </p>
+  </div>
+  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
@@ -346,8 +357,9 @@
                   <option>Not Started</option>
                   <option>In Progress</option>
                   <option>Completed</option>
-                  <option>Pending</option> 
-                  <option>Urgent</option> 
+                  <option>Pending</option>
+                  <option>Urgent</option>
+                  <option>Cancelled</option>
                 </select>
             </div>
             <div class="form-group">
@@ -356,9 +368,14 @@
             </div>
           </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-custom-outline" data-dismiss="modal">Close</button>
-          <button type="button" id="postEditProject" class="btn btn-primary">Save Changes</button>
+        <div class="modal-footer justify-content-between">
+          <div>
+            <button type="button" class="btn btn-danger" id="deleteProject">Delete Project</button>
+          </div>
+          <div>
+            <button type="button" class="btn btn-custom-outline" data-dismiss="modal">Close</button>
+            <button type="button" id="postEditProject" class="btn btn-primary">Save Changes</button>
+          </div>
         </div>
       </div>
     </div>
@@ -430,29 +447,8 @@
     });
 
     $(document).ready(function() {
-      // Destroy the existing DataTable instance if it exists
-      if ($.fn.DataTable.isDataTable('#dataTableHover')) {
-          $('#dataTableHover').DataTable().destroy();
-      }
-      
-      // Initialize DataTable
-      $('#dataTableHover').DataTable({
-          "paging": true, 
-          "searching": true,
-          "ordering": true,
-          "lengthChange": true, 
-          "info": true,
-          "autoWidth": false,
-          "pageLength": 10,
-          "lengthMenu": [10, 25, 50, 100], 
-          "columnDefs": [
-              { "orderable": false, "targets": -1 }
-          ]
-      });
-
       $('#save-project').on('click', function(event) {
         event.preventDefault(); // Prevent form from submitting normally
-        console.log($('#assignedEngineers').val().join(','))
 
         $.ajax({
           url: 'php/create_project.php', // URL to submit the form
@@ -482,21 +478,52 @@
         success: function(response) {
           const projectList = $('#project-list');
           projectList.empty(); // Clear the existing list
+          data = []
           response.forEach(project => {
-            projectList.append(`
-              <tr>
-                <td>${project.project_name}</td>
-                <td>${project.engineer_name}</td>
-                <td>${project.description}</td>
-                <td><span class="badge badge-${project.phase === 'Urgent' ? 'danger' : project.phase === 'Completed' ? 'success' : 'primary'}">${project.phase}</span></td>
-                <td>${project.start_date}</td>
-                <td>${project.deadline}</td>
-                <td>
-                  <a href='#' data-id='${project.project_id}' data-name='${project.project_name}' data-engineer='${project.engineer_name}' data-description='${project.description}' data-phase='${project.phase}' data-deadline='${project.deadline}' class='editProject btn btn-sm btn-warning' data-toggle='modal' data-target='#editProject'>Edit</a>
-                  <a href="#" class="btn btn-sm btn-primary detailButton" data-toggle="modal" data-target="#detailModal" data-id="${project.project_id}" data-notes="${project.notes}" data-project="${project.project_name}">Detail</a>
-                </td>
-              </tr>`
-            );
+            content = []
+            content.push(project.project_name)
+            content.push(project.engineer_name)
+            content.push(project.description)
+            content.push(`<span class="badge badge-${project.phase === 'Urgent' ? 'danger' : project.phase === 'Completed' ? 'success' : project.phase === 'Pending' ? 'warning': project.phase === 'Not Started' ? 'secondary' : project.phase === 'Cancelled' ? 'secondary' : 'primary'}">${project.phase}</span>`)
+            content.push(project.start_date)
+            content.push(project.deadline)
+            content.push(`<a href='#' data-id='${project.project_id}' data-name='${project.project_name}' data-engineer='${project.engineer_name}' data-description='${project.description}' data-phase='${project.phase}' data-deadline='${project.deadline}' class='editProject btn btn-sm btn-warning' data-toggle='modal' data-target='#editProject'>Edit</a>&nbsp;<a href="#" class="btn btn-sm btn-primary detailButton" data-toggle="modal" data-target="#detailModal" data-id="${project.project_id}" data-notes="${project.notes}" data-project="${project.project_name}">Detail</a>`)
+            data.push(content)
+            // projectList.append(`
+            //   <tr>
+            //     <td>${project.project_name}</td>
+            //     <td>${project.engineer_name}</td>
+            //     <td>${project.description}</td>
+            //     <td><span class="badge badge-${project.phase === 'Urgent' ? 'danger' : project.phase === 'Completed' ? 'success' : 'primary'}">${project.phase}</span></td>
+            //     <td>${project.start_date}</td>
+            //     <td>${project.deadline}</td>
+            //     <td>
+            //       <a href='#' data-id='${project.project_id}' data-name='${project.project_name}' data-engineer='${project.engineer_name}' data-description='${project.description}' data-phase='${project.phase}' data-deadline='${project.deadline}' class='editProject btn btn-sm btn-warning' data-toggle='modal' data-target='#editProject'>Edit</a>
+            //       <a href="#" class="btn btn-sm btn-primary detailButton" data-toggle="modal" data-target="#detailModal" data-id="${project.project_id}" data-notes="${project.notes}" data-project="${project.project_name}">Detail</a>
+            //     </td>
+            //   </tr>`
+            // );
+          });
+
+          // Destroy the existing DataTable instance if it exists
+          if ($.fn.DataTable.isDataTable('#dataTableHover')) {
+              $('#dataTableHover').DataTable().destroy();
+          }
+          
+          // Initialize DataTable
+          $('#dataTableHover').DataTable({
+              data: data,
+              "paging": true, 
+              "searching": true,
+              "ordering": true,
+              "lengthChange": true, 
+              "info": true,
+              "autoWidth": false,
+              "pageLength": 10,
+              "lengthMenu": [10, 25, 50, 100], 
+              "columnDefs": [
+                  { "orderable": false, "targets": -1 }
+              ]
           });
         },
         error: function(xhr, status, error) {
@@ -534,6 +561,24 @@
             alert("An error occurred: " + error); // Display error alert if necessary
           }
         });
+      });
+
+      $('#deleteProject').on('click', function(event) {
+        const confirmDelete = confirm('This project, notes, and all the submissions are going to be lost forever. Are you sure?');
+
+        if(confirmDelete) {
+          $.ajax({
+            url: `php/delete_projects.php?id=` +  $('#editId').val(), // URL to submit the form
+            type: 'GET',
+            success: function(response) {
+              alert("Project deleted successfully!"); // Display success alert
+              location.reload();
+            },
+            error: function(xhr, status, error) {
+              alert("An error occurred: " + error); // Display error alert if necessary
+            }
+          });
+        }
       });
     });
 

@@ -1,8 +1,8 @@
 <?php
 $host = 'localhost'; // Your database host
-$dbname = 'meeting_calendar'; // Your database name
-$username = 'Hnglingli'; // Your database username
-$password = 'Cindy_0205'; // Your database password
+$dbname = 'project_tracking'; // Your database name
+$username = 'root'; // Your database username
+$password = ''; // Your database password
 
 try {
     // Adding charset to the connection

@@ -1,12 +1,15 @@
 <?php
 require 'db.php'; // Include your database connection
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $meetingId = $_POST['meeting_id'];
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    $meetingId = $_GET['id'];
 
-    $stmt = $pdo->prepare("DELETE FROM meetings WHERE id = ?");
+    $stmt = $pdo->prepare("DELETE FROM meetings WHERE meeting_id = ?");
     $stmt->execute([$meetingId]);
 
-    echo "Meeting deleted successfully!";
+    $response['success'] = true;
+    $response['message'] = 'Meeting deleted successfully!';
+
+    echo json_encode($response);
 }
 ?>

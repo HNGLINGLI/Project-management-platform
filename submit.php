@@ -162,13 +162,14 @@
                   </div>
         
                   <!-- File Upload (Optional) -->
-                  <!-- <div class="form-group">
+                  <div class="form-group">
                     <label for="customFile">Attach Report (Optional)</label>
                     <div class="custom-file">
-                      <input type="file" class="custom-file-input" id="customFile">
-                      <label class="custom-file-label" for="customFile">Choose file</label>
-                    </div>
-                  </div> -->
+                    <input type="file" class="custom-file-input" id="customFile" disabled>
+                    <label class="custom-file-label" for="customFile">Choose file</label>
+                 </div>
+                 <small class="form-text text-muted">*The file submission function is currently unavailable.</small>
+                 </div>
         
                   <!-- Deadline (Read-only) -->
                   <div class="form-group">

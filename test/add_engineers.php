@@ -1,8 +1,8 @@
 <?php
 $servername = "localhost"; 
-$username = "hnglingli";        
-$password = "Cindy_02052000";            
-$dbname = "project_tracking"; 
+$username = "Your_database_username";        
+$password = "Your_database_password";            
+$dbname = "Your_database_name"; 
 
 // Enable detailed error reporting
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);

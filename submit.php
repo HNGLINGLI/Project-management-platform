@@ -161,15 +161,35 @@
                     <textarea class="form-control" id="progressNotes" rows="5" placeholder="Write any updates or comments here..." required></textarea>
                   </div>
         
-                  <!-- File Upload (Optional) -->
-                  <div class="form-group">
-                    <label for="customFile">Attach Report (Optional)</label>
-                    <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="customFile" disabled>
-                    <label class="custom-file-label" for="customFile">Choose file</label>
-                 </div>
-                 <small class="form-text text-muted">*The file submission function is currently unavailable.</small>
-                 </div>
+<!-- File Upload -->
+<div class="form-group">
+  <label for="customFile">Attach Report (Optional)</label>
+  <div class="custom-file">
+    <input type="file" class="custom-file-input" id="customFile" onchange="handleFileSelection()">
+    <label class="custom-file-label" for="customFile">Choose file</label>
+  </div>
+  <small class="form-text text-muted">*The file submission function is currently unavailable.</small>
+</div>
+
+<!-- Warning Modal -->
+<div class="modal fade" id="warningModal" tabindex="-1" role="dialog" aria-labelledby="warningModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="warningModalLabel">File Submission Disabled</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        我不是跟你説不能上轉了嗎
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
         
                   <!-- Deadline (Read-only) -->
                   <div class="form-group">
@@ -206,10 +226,8 @@
   <script src="js/project-management.js"></script>
   <!-- Page level plugins -->
   <script src="vendor/chart.js/Chart.min.js"></script>
-  <!-- Page level custom scripts -->
-  <script src="js/demo/chart-area-demo.js"></script>
-  <script src="js/demo/chart-pie-demo.js"></script>
-  <script src="js/demo/chart-bar-demo.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
   <script>
     $(document).ready(function() {
@@ -270,6 +288,15 @@
         });
       });
     });
+
+    function handleFileSelection() {
+    const fileInput = document.getElementById('customFile');
+    if (fileInput.files.length > 0) {
+      $('#warningModal').modal('show');
+      fileInput.value = '';
+    }
+  }
+
   </script>
 </body>
 

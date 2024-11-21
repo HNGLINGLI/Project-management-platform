@@ -3,7 +3,7 @@ echo "Editing Engineer!";
 
 $servername = "localhost";
 $username = "hnglingli";
-$password = "Cindy0205";
+$password = "Cindy_02052000";
 $dbname = "project_tracking";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -14,7 +14,7 @@ if ($conn->connect_error) {
 
 // Fetching the engineer data based on the ID from GET parameters
 if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id'])) {
-    $id = (int)$_GET['$id'];
+    $id = (int)$_GET['id'];
     $sql = "SELECT * FROM engineers WHERE engineer_id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $engineer_id);
@@ -33,36 +33,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id'])) {
     $startDate = $_POST['startDate'];
     $salary = str_replace(",", "", $_POST['salary']); 
 
-    // Correct SQL UPDATE syntax
-    $sql = "UPDATE engineers SET name = ?, position = ?, age = ?, start_date = ?, salary = ? WHERE WHERE engineer_id = ?";
-    $stmt = $conn->prepare($sql);
-    // Bind parameters, added id at the end for the WHERE clause
-    $stmt->bind_param("ssidsi", $name, $position, $age, $startDate, $salary, $engineer_id);
+    $query = "UPDATE engineers SET name = '$name', position = '$position', age = $age, start_date = '$startDate', salary = $salary WHERE engineer_id = $engineer_id";
 
-    if ($stmt->execute()) {
+    if ($conn->query($query) === TRUE) {
         echo "Record updated successfully!";
-        exit();
     } else {
         echo "Error: " . htmlspecialchars($stmt->error);
     }
-    $stmt->close();
+    // $stmt->close();
 }
 $conn->close();
 ?>
-
-<!-- HTML form for editing -->
-<!DOCTYPE html>
-<html lang="en">
-<head><title>Edit Engineer</title></head>
-<body>
-<form action="edit_engineer.php?id=<?php echo $id; ?>" method="POST"> <!-- Include ID in the action -->
-    <input type="hidden" name="id" value="<?php echo $engineer['id']; ?>">
-    <input type="text" name="name" value="<?php echo htmlspecialchars($engineer['name']); ?>" required>
-    <input type="text" name="position" value="<?php echo htmlspecialchars($engineer['position']); ?>" required>
-    <input type="number" name="age" value="<?php echo htmlspecialchars($engineer['age']); ?>" required>
-    <input type="date" name="startDate" value="<?php echo htmlspecialchars($engineer['start_date']); ?>" required>
-    <input type="text" name="salary" value="<?php echo htmlspecialchars(number_format($engineer['salary'], 2)); ?>" required>
-    <button type="submit">Update</button>
-</form>
-</body>
-</html>

@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost"; 
 $username = "hnglingli";        
-$password = "Cindy0205";            
+$password = "Cindy_02052000";            
 $dbname = "project_tracking"; 
 
 // Create connection

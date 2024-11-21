@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost"; 
 $username = "hnglingli";        
-$password = "Cindy0205";            
+$password = "Cindy_02052000";            
 $dbname = "project_tracking"; 
 
 // Enable detailed error reporting
@@ -20,13 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = htmlspecialchars($_POST['name']);
     $position = htmlspecialchars($_POST['position']);
     $age = (int)$_POST['age'];
-
-    // Create DateTime object from posted start date and format it
-    $startDate = new DateTime($_POST['startDate']);
-    $formattedStartDate = $startDate->format('Y-m-d'); 
-
-    // Output formatted date
-    echo "<td>" . htmlspecialchars($formattedStartDate) . "</td>";
+    $startDate = $_POST['startDate'];
 
     // Handle salary input
     $salary = str_replace(",", "", $_POST['salary']); // Remove commas
@@ -39,30 +33,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-
-    // Prepare SQL statement to insert data
-    // Corrected SQL to match the number of columns and placeholders
-    $sql = "INSERT INTO engineers (name, position, age, start_date, salary) VALUES (?, ?, ?, ?, ?)";
-    $stmt = $conn->prepare($sql);
-    
-    if ($stmt === false) {
-        die("Prepare failed: " . htmlspecialchars($conn->error));
-    }
-
-    // Bind parameters to the SQL query
-    // Correct binding: name, position, age, startDate, salary
-    $stmt->bind_param("ssids", $name, $position, $age, $startDate, $salary);
+    $query = "INSERT INTO engineers (name, position, age, start_date, salary) VALUES ('$name', '$position', $age, '$startDate', $salary)";
 
     // Execute and check if insertion was successful
-    if ($stmt->execute()) {
-        echo "Member added successfully!";
+    if ($conn->query($query) === TRUE) {
+        echo "success";
     } else {
-        echo "Error: " . htmlspecialchars($stmt->error);
+        echo "error: " . htmlspecialchars($stmt->error);
     }
-
-    // Close the statement
-    $stmt->close();
-
+    
 // Close the database connection
 $conn->close();
 ?>

@@ -153,41 +153,7 @@
                       </tr>
                     </thead>
                     <tbody id="project-list">
-                      <!-- <tr>
-                        <td><a href="#" title="Download project details">RA0449</a></td>
-                        <td>Udin Wayang</td>
-                        <td>Nasi Padang</td>
-                        <td><span class="badge badge-success">Delivered</span></td>
-                        <td><a href="#" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#detailModal">Detail</a></td>
-                      </tr>
-                      <tr>
-                        <td><a href="#">RA5324</a></td>
-                        <td>Jaenab Bajigur</td>
-                        <td>Gundam 90' Edition</td>
-                        <td><span class="badge badge-warning">Shipping</span></td>
-                        <td><a href="#" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#detailModal">Detail</a></td>
-                      </tr>
-                      <tr>
-                        <td><a href="#">RA8568</a></td>
-                        <td>Rivat Mahesa</td>
-                        <td>Oblong T-Shirt</td>
-                        <td><span class="badge badge-danger">Pending</span></td>
-                        <td><a href="#" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#detailModal">Detail</a></td>
-                      </tr>
-                      <tr>
-                        <td><a href="#">RA1453</a></td>
-                        <td>Indri Junanda</td>
-                        <td>Hat Rounded</td>
-                        <td><span class="badge badge-info">Processing</span></td>
-                        <td><a href="#" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#detailModal">Detail</a></td>
-                      </tr>
-                      <tr>
-                        <td><a href="#">RA1998</a></td>
-                        <td>Udin Cilok</td>
-                        <td>Baby Powder</td>
-                        <td><span class="badge badge-success">Delivered</span></td>
-                        <td><a href="#" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#detailModal">Detail</a></td>
-                      </tr> -->
+                      <!-- Later will be populated by PHP -->
                     </tbody>
                   </table>
                 </div>
@@ -208,11 +174,6 @@
         </button>
       </div>
       <div class="modal-body">
-        <!-- <div>
-          <h6>Latest Report</h6>
-          <p id="latest-report">No recent report available.</p>
-        </div>
-        <hr> -->
         <div>
           <h6>Engineer Notes</h6>
           <p id="engineer-notes">No notes provided.</p>
@@ -489,20 +450,6 @@
             content.push(project.deadline)
             content.push(`<a href='#' data-id='${project.project_id}' data-name='${project.project_name}' data-engineer='${project.engineer_name}' data-description='${project.description}' data-phase='${project.phase}' data-deadline='${project.deadline}' class='editProject btn btn-sm btn-warning' data-toggle='modal' data-target='#editProject'>Edit</a>&nbsp;<a href="#" class="btn btn-sm btn-primary detailButton" data-toggle="modal" data-target="#detailModal" data-id="${project.project_id}" data-notes="${project.notes}" data-project="${project.project_name}">Detail</a>`)
             data.push(content)
-            // projectList.append(`
-            //   <tr>
-            //     <td>${project.project_name}</td>
-            //     <td>${project.engineer_name}</td>
-            //     <td>${project.description}</td>
-            //     <td><span class="badge badge-${project.phase === 'Urgent' ? 'danger' : project.phase === 'Completed' ? 'success' : 'primary'}">${project.phase}</span></td>
-            //     <td>${project.start_date}</td>
-            //     <td>${project.deadline}</td>
-            //     <td>
-            //       <a href='#' data-id='${project.project_id}' data-name='${project.project_name}' data-engineer='${project.engineer_name}' data-description='${project.description}' data-phase='${project.phase}' data-deadline='${project.deadline}' class='editProject btn btn-sm btn-warning' data-toggle='modal' data-target='#editProject'>Edit</a>
-            //       <a href="#" class="btn btn-sm btn-primary detailButton" data-toggle="modal" data-target="#detailModal" data-id="${project.project_id}" data-notes="${project.notes}" data-project="${project.project_name}">Detail</a>
-            //     </td>
-            //   </tr>`
-            // );
           });
 
           // Destroy the existing DataTable instance if it exists

@@ -1,8 +1,8 @@
 <?php
 $host = 'localhost'; // Your database host
 $dbname = 'project_tracking'; // Your database name
-$username = 'root'; // Your database username
-$password = ''; // Your database password
+$username = 'hnglingli'; // Your database username
+$password = 'Cindy_02052000'; // Your database password
 
 try {
     // Adding charset to the connection

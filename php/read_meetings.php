@@ -1,7 +1,9 @@
 <?php
 require 'db.php'; // Include your database connection
 
-$stmt = $pdo->query("SELECT meeting_id, customer_name, date, time, name as engineer_name FROM meetings m INNER JOIN engineers e ON m.engineer_id = e.engineer_id");
+$month = $_GET['month'];
+$year = $_GET['year'];
+$stmt = $pdo->query("SELECT meeting_id, customer_name, date, time, name as engineer_name FROM meetings m INNER JOIN engineers e ON m.engineer_id = e.engineer_id WHERE monthname(date) = '$month' and year(date) = '$year'");
 $meetings = $stmt->fetchAll(PDO::FETCH_ASSOC);
 echo json_encode($meetings);
 

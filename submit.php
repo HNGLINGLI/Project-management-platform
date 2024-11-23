@@ -148,7 +148,7 @@
                   <!-- Assignment Status (Editable by Manager Only) -->
                   <div class="form-group">
                     <label for="assignmentStatus">Assignment Status</label>
-                    <select class="form-control" id="assignmentStatus" <?php echo ($userRole !== 'manager') ? 'disabled' : ''; ?>>
+                    <select class="form-control" id="assignmentStatus">
                       <option value="Ongoing">Ongoing</option>
                       <option value="Minor adjustment needed">Minor adjustment needed</option> 
                       <option value="Urgent">Urgent</option> 

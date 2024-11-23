@@ -153,7 +153,7 @@
                       </tr>
                     </thead>
                     <tbody id="project-list">
-                      <!-- Later will be populated by PHP -->
+                      <!-- This part will be populated by mySQL database -->
                     </tbody>
                   </table>
                 </div>
@@ -175,31 +175,33 @@
       </div>
       <div class="modal-body">
         <div>
+          <h6>Assignment Status</h6>
+          <div id="asg-status"></div>
+        </div>
+        <hr>
+        <div>
           <h6>Engineer Notes</h6>
           <p id="engineer-notes">No notes provided.</p>
         </div>
         <div id="see-more-section">
-  <hr>
-  <h6>Additional Details</h6>
-  <p>Last Report: <a href="#" title="Data not available!" id="last-report-link"><strong>Click here to see the newest report</strong></a></p>
-</div>
-<button 
-  id="see-more-btn" 
-  class="btn" 
-  title="Data also not available!" 
-  style="background-color: #ffffff; color: rgb(169, 81, 81); font-size: 1rem; border: none; padding: 5px 10px; cursor: pointer; transition: background-color 0.3s ease;"
->
-  See more >>
-</button>
-
+          <hr>
+          <h6>Additional Details</h6>
+          <p>Last Report: <a href="#" title="Data not available!" id="last-report-link"><strong>Click here to see the newest report</strong></a></p>
+        </div>
+        <button 
+          id="see-more-btn" 
+          class="btn" 
+          title="Data also not available!" 
+          style="background-color: #ffffff; color: rgb(169, 81, 81); font-size: 1rem; border: none; padding: 5px 10px; cursor: pointer; transition: background-color 0.3s ease;"
+        >
+          See more >>
+        </button>
       </div>
-      <div class="modal-footer">
-  <div class="modal-note">
-    <p class="text-muted mb-0 text-left" style="font-size: 0.85rem;">
-      <em>Note: File submission and database functionality are not implemented. Submissions cannot be viewed.</em>
-    </p>
-  </div>
-  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      <div class="modal-footer d-flex justify-content-between align-items-center">
+        <p class="text-muted mb-0" style="font-size: 0.85rem;">
+          <em>Note: File submission and database functionality are not implemented. Submissions cannot be viewed.</em>
+        </p>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
@@ -448,7 +450,7 @@
             content.push(`<span class="badge badge-${project.phase === 'Urgent' ? 'danger' : project.phase === 'Completed' ? 'success' : project.phase === 'Pending' ? 'warning': project.phase === 'Not Started' ? 'secondary' : project.phase === 'Cancelled' ? 'secondary' : 'primary'}">${project.phase}</span>`)
             content.push(project.start_date)
             content.push(project.deadline)
-            content.push(`<a href='#' data-id='${project.project_id}' data-name='${project.project_name}' data-engineer='${project.engineer_name}' data-description='${project.description}' data-phase='${project.phase}' data-deadline='${project.deadline}' class='editProject btn btn-sm btn-warning' data-toggle='modal' data-target='#editProject'>Edit</a>&nbsp;<a href="#" class="btn btn-sm btn-primary detailButton" data-toggle="modal" data-target="#detailModal" data-id="${project.project_id}" data-notes="${project.notes}" data-project="${project.project_name}">Detail</a>`)
+            content.push(`<a href='#' data-id='${project.project_id}' data-name='${project.project_name}' data-engineer='${project.engineer_name}' data-description='${project.description}' data-phase='${project.phase}' data-deadline='${project.deadline}' class='editProject btn btn-sm btn-warning' data-toggle='modal' data-target='#editProject'>Edit</a>&nbsp;<a href="#" class="btn btn-sm btn-primary detailButton" data-toggle="modal" data-target="#detailModal" data-id="${project.project_id}" data-notes="${project.notes}" data-asg-status="${project.status}" data-project="${project.project_name} ">Detail</a>`)
             data.push(content)
           });
 
@@ -484,6 +486,18 @@
 
         const notes = $(this).data('notes') || 'No notes provided.';
         $('#engineer-notes').text(notes);
+
+        let status = $(this).data('asg-status');
+        if(status === 'Ongoing') {
+          status = '<span class="badge badge-primary">Ongoing</span>'
+        } else if(status === 'Minor adjustment needed') {
+          status = '<span class="badge badge-warning">Minor adjustment needed</span>'
+        } else if(status === 'Urgent') {
+          status = '<span class="badge badge-danger">Urgent</span>'
+        } else {
+          status = 'No Status'
+        }
+        $('#asg-status').html(status);
       });
 
       $('#postEditProject').on('click', function(event) {

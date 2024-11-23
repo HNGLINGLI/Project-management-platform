@@ -9,44 +9,22 @@ let currentYear = new Date().getFullYear(); // Current year
 
 function loadUsers() {
     const userSelect = document.getElementById('user-name');
-    userSelect.innerHTML = `<option value="">Select User</option><option value="add-user">Add New User</option>`;
+    userSelect.innerHTML = `<option value="" disabled selected hidden>Select User</option>`;
 
-    fetch('read_users.php')
+    fetch('php/read_users.php')
         .then(response => response.json())
         .then(data => {
-            console.log('Users loaded:', data); // Log the loaded users
+            console.log('Users loaded:', data);
             if (data) {
                 data.forEach(user => {
                     const option = document.createElement('option');
-                    option.value = user.id; // Assuming the user ID is in the response
-                    option.textContent = user.name; // Assuming the user name is in the response
+                    option.value = user.id;
+                    option.textContent = user.name;
                     userSelect.appendChild(option);
                 });
             }
         })
         .catch(err => console.error('Error loading users:', err)); // Catch fetch errors
-}
-
-function loadMeetings() {
-    const meetingsList = document.getElementById('meetings-list');
-    meetingsList.innerHTML = ''; // Clear previous meetings
-    fetch('read_meetings.php')
-        .then(response => response.json())
-        .then(data => {
-            console.log('Meetings loaded:', data); // Log the loaded meetings
-            if (data) {
-                data.forEach(meeting => {
-                    const meetingItem = document.createElement('div');
-                    meetingItem.className = 'meeting-item';
-                    meetingItem.innerHTML = `
-                        <strong>${meeting.customerName}</strong><br>
-                        ${meeting.date} at ${meeting.time} <button class="edit-btn">Edit</button><button class="delete-btn">Delete</button>
-                    `;
-                    meetingsList.appendChild(meetingItem);
-                });
-            }
-        })
-        .catch(err => console.error('Error loading meetings:', err)); // Catch fetch errors
 }
 
 // Generate calendar
@@ -82,7 +60,13 @@ function generateCalendar() {
     }
 
     // Load meetings for the current month
-    loadMeetings();
+    const date = firstDayOfMonth;
+    const year = date.getFullYear()
+    const month = date.toLocaleString('default', { month: 'long' })
+    const monthNumber = date.getMonth() + 1
+    document.getElementById('month-filter').value = monthNumber
+    document.getElementById('current-year').value = year
+    loadMeetings(month, year);
 }
 
 // Handle month navigation
@@ -114,14 +98,14 @@ function showMeetingsTooltip(event) {
 
     console.log(`Fetching meetings for date: ${year}-${month + 1}-${date}`); // Log the date being fetched
 
-    fetch(`read_meetings.php?date=${year}-${month + 1}-${date}`)
+    fetch(`php/read_meetings.php`)
         .then(response => response.json())
         .then(meetingsToday => {
             console.log('Meetings for today:', meetingsToday); // Log the meetings fetched
             if (meetingsToday.length > 0) {
                 let tooltip = document.createElement('div');
                 tooltip.className = 'meeting-tooltip';
-                tooltip.innerHTML = `Meetings: ${meetingsToday.join(', ')}`;
+                tooltip.innerHTML = `Meetings:`;
                 dayElement.appendChild(tooltip);
             }
         })
@@ -137,25 +121,21 @@ function hideMeetingsTooltip(event) {
     }
 }
 
-// Add event listener for tooltip functionality
-document.getElementById('calendar').addEventListener('mouseover', showMeetingsTooltip);
-document.getElementById('calendar').addEventListener('mouseout', hideMeetingsTooltip);
-
 // Handle form submission
 document.getElementById('meeting-form').addEventListener('submit', (event) => {
     event.preventDefault();
 
-    const userName = document.getElementById('user-name').value;
-    const newUserName = document.getElementById('new-user-name').value;
+    const engineerId = document.getElementById('user-name').value;
+    // const newUserName = document.getElementById('new-user-name').value;
     const customerName = document.getElementById('customer-name').value;
     const meetingDate = document.getElementById('meeting-date').value; // Get date from the input field
     const meetingTime = document.getElementById('meeting-time').value;
 
     const meetingData = {
-        userId: userName === 'add-user' ? newUserName : userName,
-        customerName,
-        date: meetingDate,
-        time: meetingTime
+        customer_name: customerName,
+        meeting_date: meetingDate,
+        meeting_time: meetingTime,
+        engineer_id: engineerId
     };
 
     // Create meeting to the server via PHP
@@ -168,10 +148,11 @@ document.getElementById('meeting-form').addEventListener('submit', (event) => {
     })    
         .then(response => response.json())
         .then(data => {
+            console.log('test', data)
             if (data.success) {
                 alert('Meeting scheduled successfully!');
                 document.getElementById('meeting-form').reset();
-                loadMeetings();
+                location.reload();
             } else {
                 alert('Failed to schedule meeting.');
             }
@@ -183,37 +164,35 @@ document.getElementById('meeting-form').addEventListener('submit', (event) => {
 });
 
 // Load meetings from PHP
-function loadMeetings() {
+function loadMeetings(month, year) {
     const meetingsList = document.getElementById('meetings-list');
     meetingsList.innerHTML = ''; // Clear previous meetings
-    fetch('php/read_meetings.php')
+    fetch('php/read_meetings.php?month=' + month + '&year=' + year)
         .then(response => response.json())
         .then(data => {
             if (data) {
                 data.forEach(meeting => {
+                    const meetingDate = meeting.date.split("-");
+                    const year = meetingDate[0]
+                    const month = (meetingDate[1] - 1)
+                    const date = parseInt(meetingDate[2], 10)
+                    const meetingDay = document.querySelector(`.calendar-day[data-date="${date}"][data-month="${month}"][data-year="${year}"]`);
+                    if(meetingDay) {
+                        meetingDay.style.backgroundColor = "#615751";
+                        meetingDay.style.color = "white";
+                    }
                     const meetingItem = document.createElement('div');
                     meetingItem.className = 'meeting-item';
                     meetingItem.innerHTML = `
-                        <strong>${meeting.customerName}</strong><br>
-                        ${meeting.date} at ${meeting.time} <button class="edit-btn" data-id="${meeting.id}">Edit</button>
-                        <button class="delete-btn" data-id="${meeting.id}">Delete</button>
+                        <strong>${meeting.engineer_name}</strong> with ${meeting.customer_name}<br>
+                        ${meeting.date} at ${meeting.time} <button class="edit-btn editMeeting" data-id="${meeting.meeting_id}" data-engineer="${meeting.engineer_name}" data-customer="${meeting.customer_name}" data-date="${meeting.date}" data-time="${meeting.time}" data-toggle="modal" data-target="#editMeeting">Edit</button>
+                        <button class="delete-btn delete-meeting" data-id="${meeting.meeting_id}">Delete</button>
                     `;
                     meetingsList.appendChild(meetingItem);
                 });
             }
         })
         .catch(err => console.error('Error loading meetings:', err));
-
-    // Add event listener for edit and delete buttons
-    meetingsList.addEventListener('click', (event) => {
-        if (event.target.classList.contains('edit-btn')) {
-            const meetingId = event.target.dataset.id; // Get the meeting ID
-            handleEdit(meetingId); // Call edit function
-        } else if (event.target.classList.contains('delete-btn')) {
-            const meetingId = event.target.dataset.id; // Get the meeting ID
-            handleDelete(meetingId); // Call delete function
-        }
-    });
 }
 
 // Function to handle edit functionality
@@ -221,34 +200,3 @@ function handleEdit(meetingId) {
     console.log(`Edit meeting with ID: ${meetingId}`);
     // Implement your edit logic here, such as opening a modal to edit meeting details
 }
-
-// Function to handle delete functionality
-function handleDelete(meetingId) {
-    const confirmDelete = confirm('Are you sure you want to delete this meeting?');
-    if (confirmDelete) {
-        // Call your delete API here
-        fetch(`delete_meeting.php?id=${meetingId}`, { method: 'DELETE' })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert('Meeting deleted successfully.');
-                    loadMeetings(); // Refresh the meeting list
-                } else {
-                    alert('Failed to delete meeting.');
-                }
-            })
-            .catch(err => console.error('Error deleting meeting:', err));
-    }
-}
-
-// Event listeners for adding new user
-document.getElementById('user-name').addEventListener('change', (event) => {
-    const selectedValue = event.target.value;
-    const newUserNameField = document.getElementById('new-user-name');
-
-    if (selectedValue === 'add-user') {
-        newUserNameField.style.display = 'block';
-    } else {
-        newUserNameField.style.display = 'none';
-    }
-});
